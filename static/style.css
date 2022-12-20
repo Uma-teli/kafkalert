@@ -1,7 +1,7 @@
  .mort-calculator {
     font-family: "Roboto", sans-serif;
     width: 600px;
-    margin: 24px auto;
+    margin: 20px auto;
     background: #fff;
     box-shadow: 0 12px 50px -11px rgb (0, 0, 0, 0.2);
     border-radius: 8px;
@@ -59,14 +59,18 @@
 }
 
 .mort-calculator .result .value{
-    font-size: 30px;
-    font-weight: 900;
+    font-size: 20px;
+    font-weight: 400;
+    padding: 8px 24px;
     padding-bottom: 10px;
-    border-bottom: 1px solid rgba(20, 33, 61, 0.2);
+    #width: 100%;
+   # border-bottom: 1px solid rgba(20, 33, 61, 0.2);
 }
 
-.mort-calculator .result .value::before {
-    content: "$";
+
+
+.mort-calculator .result .opvalue::after {
+    content: "%";
     font-size: 24px;
     font-weight: 400;
     margin-right: 6px;
@@ -84,6 +88,14 @@
     cursor: pointer;
     margin: 24px 0;
 }
+
+.mort-calculator .result .opvalue{
+    font-size: 30px;
+    font-weight: 900;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(20, 33, 61, 0.2);
+}
+
 
 @media (max-width: 650px) {
     .mort-calculator {
