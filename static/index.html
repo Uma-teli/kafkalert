@@ -5,7 +5,126 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mortgage Calc</title>
-    <link href="/static/style.css" rel="stylesheet" >
+    <link href="style.css" rel="stylesheet" >
+    <style>
+         .mort-calculator {
+    font-family: "Roboto", sans-serif;
+    width: 600px;
+    margin: 20px auto;
+    background: #fff;
+    box-shadow: 0 12px 50px -11px rgb (0, 0, 0, 0.2);
+    border-radius: 8px;
+    color: #14213d;
+    overflow: hidden;
+ }
+
+ .mort-calculator,
+ .mort-calculator * {
+    box-sizing: border-box;
+ }
+
+ .mort-calculator .top {
+    background: #14213d;
+    color: #fff;
+    padding: 32px;
+ }
+
+.mort-calculator .top h2 {
+    margin-top: 0;
+}
+
+.mort-calculator form {
+    display: flex;
+    gap: 8px;
+    justify-content: space-between;
+
+}
+
+.mort-calculator .title {
+    margin-bottom: 16px;
+}
+
+.mort-calculator form input {
+    font-size: 20px;
+    padding: 8px 24px;
+    width: 100%;
+}
+
+.mort-calculator .result {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mort-calculator .result .left{
+    width: 100%;
+    padding: 8px 32px;
+}
+
+.mort-calculator .left h3{
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 8px;
+}
+
+.mort-calculator .result .value{
+    font-size: 20px;
+    font-weight: 400;
+    padding: 8px 24px;
+    padding-bottom: 10px;
+   /* #width: 100%;
+   # border-bottom: 1px solid rgba(20, 33, 61, 0.2);*/
+}
+
+
+
+.mort-calculator .result .opvalue::after {
+    content: "%";
+    font-size: 24px;
+    font-weight: 400;
+    margin-right: 6px;
+    opacity: 0.4;
+}
+
+.mort-calculator .calculate-btn {
+    background: #e63946;
+    color: #fff;
+    border: none;
+    padding: 8px 32px;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 900;
+    cursor: pointer;
+    margin: 24px 0;
+}
+
+.mort-calculator .result .opvalue{
+    font-size: 30px;
+    font-weight: 900;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(20, 33, 61, 0.2);
+}
+
+
+@media (max-width: 650px) {
+    .mort-calculator {
+        width: 90%;
+        max-width: 500px;
+    }
+
+    .mort-calculator form {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .mort-calculator .result {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+
+    </style>
 </head>
 <body>
     
