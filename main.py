@@ -12,8 +12,8 @@ import matplotlib.pyplot as plt
 
 # On IBM Cloud Cloud Foundry, get the port number from the environment variable PORT
 # When running this app on the local machine, default the port to 8000
-#port = int(os.getenv('PORT', 8080))
-port=8000
+port = int(os.getenv('PORT', 8080))
+#port=8000
 class landingPage(tornado.web.RequestHandler):
     def get(self):
         self.render("static/index.html")
