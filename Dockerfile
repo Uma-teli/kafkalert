@@ -1,18 +1,21 @@
-FROM python:2-alpine
+FROM python:3-alpine
 
-COPY ./requirements.txt /app/requirements.txt
+#COPY ./requirements.txt /app/requirements.txt
 
-WORKDIR /app
+WORKDIR /Mortgage
 
-RUN apk --update add python py-pip openssl ca-certificates py-openssl wget bash linux-headers
-RUN apk --update add --virtual build-dependencies libffi-dev openssl-dev python-dev py-pip build-base \
+RUN apk --update add python3 py3-pip openssl ca-certificates py-openssl wget git_bash linux-headers
+RUN apk --update add --virtual build-dependencies libffi-dev openssl-dev python3-dev py3-pip build-base \
   && pip install --upgrade pip \
   && pip install --upgrade pipenv\
-  && pip install --upgrade -r /app/requirements.txt\
+  && pip install --upgrade tornado\
+  && pip install --upgrade requests\
   && apk del build-dependencies
 
-COPY . /app
+#COPY . /app
 
-ENTRYPOINT [ "python" ]
+RUN git clone https://github.com/PriyaVP-crypto/Mortgage.git
+
+ENTRYPOINT [ "python3" ]
 
 CMD [ "main.py" ]
