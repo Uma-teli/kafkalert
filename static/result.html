@@ -99,7 +99,7 @@
 }
 
 .mort-calculator .result .opvalue{
-    font-size: 30px;
+    font-size: 20px;
     font-weight: 900;
     padding-bottom: 10px;
     border-bottom: 1px solid rgba(20, 33, 61, 0.2);
@@ -208,16 +208,17 @@
                         {% if (bloc == 'predictScore') %}
                             
 
-                        insert chart here
+                        
                         {% end %}
                     </div>
                 </div>
                 
                 {% if (bloc == "predictScore") %}
-                <h6> Transaction Risk for Fraud</h6>
-                <div class="opvalue">{{x1x}}</div>
+                
                 <h6> Transaction Risk for Non-Fraud</h6>
                 <div class="opvalue">{{xox}}</div>
+                <h6> Transaction Risk for Fraud</h6>
+                <div class="opvalue">{{x1x}}</div>
                 {% end %}
             </div>
           
