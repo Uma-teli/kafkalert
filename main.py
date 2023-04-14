@@ -2,12 +2,12 @@ import os
 import json
 import requests
 import tornado.web
-import tornado.ioloop
 import tornado.autoreload
 import sys
 import asyncio
 #import psycopg2
 import time
+
 #import matplotlib.pyplot as plt
 
 # On IBM Cloud Cloud Foundry, get the port number from the environment variable PORT
@@ -51,56 +51,70 @@ class basicRevHandler(tornado.web.RequestHandler):
     def get(self):
         self.render("static/reversal.html")
 
-class predictScore(tornado.web.RequestHandler):
-    def post(self):
-        base_url = 'https://192.86.32.113:19443/api_fraud_detection/fraudDetection?merchantxname='
+#class predictScore(tornado.web.RequestHandler):
+    #def post(self):
+        #base_url = 'https://192.86.32.113:19443/api_fraud_detection/fraudDetection?merchantxname='
         #base_url = 'https://gateway.aipc1.cp4i-b2e73aa4eddf9dc566faa4f42ccdd306-0001.us-east.containers.appdomain.cloud/sachinsorg/sandbox/payments/pymntRev?acctId='
         #base_url = 'https://api.eu-gb.apiconnect.appdomain.cloud/m1ganeshtcscom1543928228162-dev/sb/payments/pymntRev?acctId='
         # 100000001001 is the only working answer
-        headers = {'Content-Type': 'application/json'}
+        #headers = {'Content-Type': 'application/json'}
         #end_url= base_url+str(self.get_body_argument("accnt"))+"&transId="+str(self.get_body_argument("trans"))+"&revAmt="+str(self.get_body_argument("debit_amt"))
-        end_url= base_url+str(self.get_body_argument("mername"))+"&user1="+str(self.get_body_argument("usr"))+"&amount="+str(self.get_body_argument("amt"))+"&merchantxstate="+str(self.get_body_argument("merstate"))+"&usexchip="+str(self.get_body_argument("chip"))+"&errorsx="+str(self.get_body_argument("err"))+"&mcc="+str(self.get_body_argument("mcc"))+"&merchantxcity="+str(self.get_body_argument("mercity"))+"&card="+str(self.get_body_argument("card"))
-        req = requests.get(end_url, headers=headers, auth=('ibmuser', 'ibmuser'), verify=False)
-        json_out = req.json()
-        print("before")
+        #end_url= base_url+str(self.get_body_argument("mername"))+"&user1="+str(self.get_body_argument("usr"))+"&amount="+str(self.get_body_argument("amt"))+"&merchantxstate="+str(self.get_body_argument("merstate"))+"&usexchip="+str(self.get_body_argument("chip"))+"&errorsx="+str(self.get_body_argument("err"))+"&mcc="+str(self.get_body_argument("mcc"))+"&merchantxcity="+str(self.get_body_argument("mercity"))+"&card="+str(self.get_body_argument("card"))
+        #req = requests.get(end_url, headers=headers, auth=('ibmuser', 'ibmuser'), verify=False)
+        #json_out = req.json()
+        #print("before")
         #print(json_out)
-        jsonstruct=json_out
+        #jsonstruct=json_out
         #print(jsonstruct)
-        jsonstruct=json.dumps(jsonstruct)
-        json_load=json.loads(jsonstruct)
+        #jsonstruct=json.dumps(jsonstruct)
+        #json_load=json.loads(jsonstruct)
         #print(json_load["MODELOUT"]["MODELOUP"]["PROBABILITYX1X"])
-        print("df")
+        #print("df")
 
-        val1=json_load['MODELOUT']['MODELOUP']['PROBABILITYX1X']
-        val2=json_load['MODELOUT']['MODELOUP']['PROBABILITYX0X']
+        #val1=json_load['MODELOUT']['MODELOUP']['PROBABILITYX1X']
+        #val2=json_load['MODELOUT']['MODELOUP']['PROBABILITYX0X']
         #print(val1)
-        val1=round(val1,16)
-        val2=round(val2,16)
+        #val1=round(val1,16)
+        #val2=round(val2,16)
         #print (val1)
-        val1=round((val1*100),2)
-        val2=round((val2*100),2)
+        #val1=round((val1*100),2)
+        #val2=round((val2*100),2)
         #print(val1)
         #val1=round(val1,2)
         #print(val1)
         #percent1=val1
         #percent2=int(json_load['MODELOUT']['MODELOUP']['PROBABILITYX0X'])*100
-        print(val1,val2)
-        labels= ['Risk for transfer', 'Non-risk for transfer']
-        colors=['#14213d','#e63946']
-        sizes= [val1,val2]
+        #print(val1,val2)
+        #labels= ['Risk for transfer', 'Non-risk for transfer']
+        #colors=['#14213d','#e63946']
+        #sizes= [val1,val2]
         #plt.pie(sizes,labels=labels, colors=colors, startangle=90, autopct='%1.1f%%')
         #plt.axis('equal')
         #plt.show()
 
-        self.render("static/result.html",label=labels,color=colors,size=sizes,x1x=json_load['MODELOUT']['MODELOUP']['PROBABILITYX1X'],xox=json_load['MODELOUT']['MODELOUP']['PROBABILITYX0X'],bloc="predictScore", jsonstruct=jsonstruct)
+        #self.render("static/result.html",label=labels,color=colors,size=sizes,x1x=json_load['MODELOUT']['MODELOUP']['PROBABILITYX1X'],xox=json_load['MODELOUT']['MODELOUP']['PROBABILITYX0X'],bloc="predictScore", jsonstruct=jsonstruct)
         
+class AccountList(tornado.web.RequestHandler):
+    def post(self):
+        self.render("static/result.html",xox=987623454567,x0x=999876543456,x2x=876543216789,x3x=456789032167,x4x=678923453457,bloc="AccountList")
+
+
+class AccountTransaction(tornado.web.RequestHandler):
+    def post(self):
+        self.render("static/AccountTransaction.html",Accountno=123456786789 ,currentbal=9000 ,credit=1, transid=1,transamt=10,description=1234,bloc="AccountTransaction")
+
+class AccountDetails(tornado.web.RequestHandler):
+    def post(self):
+        self.render("static/AccountDetails.html",accountno=123456787896, balance=3456 ,ID=12 ,Description=123,transid=123, transamt=10,bloc="AccountDetails") 
 
 
 
 if __name__ == "__main__":
     app = tornado.web.Application([
         (r"/", landingPage),
-        (r"/predictScore", predictScore),
+        (r"/AccountList", AccountList),
+        (r"/AccountDetails",AccountDetails),
+        (r"/AccountTransaction",AccountTransaction)
 
     ])
     print("commit")
