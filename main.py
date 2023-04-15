@@ -101,11 +101,11 @@ class AccountList(tornado.web.RequestHandler):
 
 class AccountTransaction(tornado.web.RequestHandler):
     def post(self):
-        self.render("static/AccountTransaction.html",Accountno=123456786789 ,currentbal=9000 ,credit=1, transid=1,transamt=10,description=1234,bloc="AccountTransaction")
+        self.render("static/AccountTransaction.html",Accountno=123456786789 ,currentbal=90000 ,credit=1, transid='C',transamt=10.00,description=5090.00,bloc="AccountTransaction")
 
 class AccountDetails(tornado.web.RequestHandler):
     def post(self):
-        self.render("static/AccountDetails.html",accountno=123456787896, balance=3456 ,ID=12 ,Description=123,transid=123, transamt=10,bloc="AccountDetails") 
+        self.render("static/AccountDetails.html",accountno=123456787896, balance=3456.00 ,ID=1768,bloc="AccountDetails") 
 
 
 
