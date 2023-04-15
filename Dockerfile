@@ -14,7 +14,7 @@ RUN apk --update add --virtual build-dependencies libffi-dev openssl-dev python3
 
 #COPY . /app
 
-RUN  https://github.com/Uma-teli/zdih.git
+RUN  git clone https://github.com/Uma-teli/zdih.git
 
 ENTRYPOINT [ "python3" ]
 
