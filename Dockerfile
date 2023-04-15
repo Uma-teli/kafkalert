@@ -14,7 +14,7 @@ RUN apk --update add --virtual build-dependencies libffi-dev openssl-dev python3
 
 #COPY . /app
 
-RUN git clone https://github.com/PriyaVP-crypto/Mortgage.git
+RUN  https://github.com/Uma-teli/project1.git
 
 ENTRYPOINT [ "python3" ]
 
