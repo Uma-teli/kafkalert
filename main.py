@@ -105,7 +105,7 @@ class AccountTransaction(tornado.web.RequestHandler):
 
 class AccountDetails(tornado.web.RequestHandler):
     def post(self):
-        self.render("static/AccountDetails.html",accountno=123456787896, balance=3456.00 ,ID=1768,bloc="AccountDetails") 
+        self.render("static/AccountDetails.html",accountno=123456787896, balance=3456.00 ,ID=176,bloc="AccountDetails") 
 
 
 
