@@ -7,6 +7,11 @@ import sys
 import asyncio
 #import psycopg2
 import time
+import pyodbc
+import pandas as pd
+
+
+
 
 #import matplotlib.pyplot as plt
 
@@ -96,16 +101,77 @@ class basicRevHandler(tornado.web.RequestHandler):
         
 class AccountList(tornado.web.RequestHandler):
     def post(self):
-        self.render("static/result.html",xox=987623454567,x0x=999876543456,x2x=876543216789,x3x=456789032167,x4x=678923453457,bloc="AccountList")
+
+        conn=pyodbc.connect(
+            Trusted_Connection ='YES',
+            Driver='{SQL Server}',
+            Server="DESKTOP-QT2Q335\SQLEXPRESS",
+            Database="AccountList"
+
+        )
+
+        sql_select_Query = "SELECT * FROM ACCOUNTLIST"
+        cursor=conn.cursor()
+        cursor.execute(sql_select_Query)
+        #for row in cursor:
+           # print(row)
+
+        #data=pd.real_sql("SELECT * FROM ACCOUNTLIST",conn)
+        records= cursor.fetchall()
+
+        cursor.close()
+        conn.close()
+
+        #for row in records:
+            #print("s1= ", row[0],)
+            #print("s2= ", row[1])
+            #print("s3= ", row[2])
+            #print("s4= ", row[3], "\n")
+
+        self.render("static/result.html",xox=records[0] ,x0x=records[1],x2x=records[2],x3x=records[4],x4x=records[5],bloc="AccountList")
 
 
 class AccountTransaction(tornado.web.RequestHandler):
     def post(self):
-        self.render("static/AccountTransaction.html",Accountno=123456786789 ,currentbal=90000 ,credit=1, transid='C',transamt=10.00,description=5090.00,bloc="AccountTransaction")
+        account=str(self.get_body_argument('account'))
+
+        conn=pyodbc.connect(
+            Trusted_Connection ='YES',
+            Driver='{SQL Server}',
+            Server="DESKTOP-QT2Q335\SQLEXPRESS",
+            Database="AccountList"
+
+        )
+        sql_select_Query = "SELECT * FROM AccountTransaction WHERE ACCOUNT_NO=%s"%account
+        cursor=conn.cursor()
+        cursor.execute(sql_select_Query)
+
+        records= cursor.fetchall()
+
+        cursor.close()
+        conn.close()
+
+        self.render("static/AccountTransaction.html",Accountno=records[0][0] ,currentbal=records[0][1] ,credit=records[0][2], transid=records[0][3],transamt=records[0][4],description=records[0][5],bloc="AccountTransaction")
 
 class AccountDetails(tornado.web.RequestHandler):
     def post(self):
-        self.render("static/AccountDetails.html",accountno=123456787896, balance=3456.00 ,ID=176,bloc="AccountDetails") 
+        account=str(self.get_body_argument('account'))
+        conn=pyodbc.connect(
+            Trusted_Connection ='YES',
+            Driver='{SQL Server}',
+            Server="DESKTOP-QT2Q335\SQLEXPRESS",
+            Database="AccountList"
+
+        )
+        sql_select_Query = "SELECT * FROM AccountDetails WHERE ACCOUNT_NO=%s"%account
+        cursor=conn.cursor()
+        cursor.execute(sql_select_Query)
+        records= cursor.fetchall()
+
+        cursor.close()
+        conn.close()
+
+        self.render("static/AccountDetails.html",accountno=records[0][0], balance=records[0][1] ,ID=records[0][2],bloc="AccountDetails") 
 
 
 
