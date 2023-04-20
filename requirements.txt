@@ -2,3 +2,5 @@ tornado==6.0.3
 requests
 psycopg2
 matplotlib
+pyodbc
+pandas
