@@ -6,10 +6,7 @@ import tornado.autoreload
 import sys
 import asyncio
 #import psycopg2
-import time
 import pyodbc
-import pandas as pd
-
 
 
 
