@@ -134,7 +134,8 @@ class AccountList(tornado.web.RequestHandler):
 class AccountTransaction(tornado.web.RequestHandler):
     def post(self):
         account=str(self.get_body_argument('account'))
-
+         
+        #connection to the databse 
         conn=pyodbc.connect(
             Trusted_Connection ='YES',
             Driver='{SQL Server}',
