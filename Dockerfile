@@ -2,7 +2,7 @@ FROM python:3-alpine
 
 #COPY ./requirements.txt /app/requirements.txt
 
-WORKDIR /zdih1
+WORKDIR  zdih1
 
 RUN apk --update add python3 py3-pip openssl ca-certificates py-openssl wget git_bash linux-headers
 RUN apk --update add --virtual build-dependencies libffi-dev openssl-dev python3-dev py3-pip build-base \
