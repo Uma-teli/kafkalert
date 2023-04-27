@@ -26,7 +26,7 @@
  }
 
  .mort-calculator .top {
-    background: #14213d;
+    background: #141b3d;
     color: #fff;
     padding: 32px;
  }
@@ -67,6 +67,7 @@
     font-size: 16px;
     font-weight: 400;
     margin-bottom: 8px;
+    
 }
 
 .mort-calculator .result .value{
@@ -139,7 +140,7 @@
     
    <div class="mort-calculator">
         <div class="top">
-            <h2>Z Digital Integration Hub</h2>
+            <h1>Z Digital Integration Hub</h1>
 
 
             
@@ -168,18 +169,79 @@
                 
                 {% if (bloc == "AccountTransaction") %}
                 <h3>Account Transaction:</h3>
-                <h4> Account No:</h4>
-                <div class="opvalue">{{Accountno}}</div>
-                <h4>Current Balance:</h4>
-                <div class="opvalue">{{currentbal}}
-                <h4>Credit Or Debit:</h4>
+                <!--<h4> Account No:</h4>
+                <div class="opvalue">{{Accountno}}</div>-->
+                <!--<h4>Current Balance:</h4>
+                <div class="opvalue">{{currentbal}}--><tr>
+                <!--<table class="striped responsive-table " style="width:800px;">-->
+
+                
+                <tr>
+                    <td><tr>
+                        <td>Account No:</td>
+                
+                        <td> {{Accountno }} </td>
+                
+                    </tr>
+                    <br>
+                    <br>
+                <tr>
+
+                    <td>Current balance:</td>
+            
+                    <td> {{ currentbal }} </td>
+            
+                </tr>
+                <br>
+                <br>
+                <tr>
+
+                    <td>Credit Or Debit:</td>
+            
+                    <td> {{credit }} </td>
+            
+                </tr>
+                <br>
+                <br>
+                <tr>
+
+                    <td>Description:</td>
+            
+                    <td> {{description }} </td>
+            
+                </tr>
+                <br>
+                <br>
+                <tr>
+
+                    <td>Transid:</td>
+            
+                    <td> {{transid }} </td>
+            
+                </tr>
+                <br>
+                <br>
+                <tr>
+
+                    <td>Transamount:</td>
+            
+                    <td> {{transamt }} </td>
+            
+                </tr>
+                <br>
+
+                
+            
+                
+            
+                <!--<h4>Credit Or Debit:</h4>
                 <div class="opvalue">{{credit}}</div>
                 <h4>Description:</h4>
                 <div class="opvalue">{{description}}</div>
                 <h4>Transid:</h4>
                 <div class="opvalue">{{transid}}</div>
-                <h4>transamount:</h4>
-                <div class="opvalue">{{transamt}}</div>
+                <h4>Transamount:</h4>
+                <div class="opvalue">{{transamt}}</div>-->
             
                 {% end %}
             </div>

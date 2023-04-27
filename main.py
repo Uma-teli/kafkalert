@@ -10,6 +10,8 @@ import pyodbc
 
 
 
+
+
 #import matplotlib.pyplot as plt
 
 # On IBM Cloud Cloud Foundry, get the port number from the environment variable PORT
@@ -111,7 +113,7 @@ class AccountList(tornado.web.RequestHandler):
         cursor=conn.cursor()
         cursor.execute(sql_select_Query)
         #for row in cursor:
-           # print(row)
+           #print(row)
 
         #data=pd.real_sql("SELECT * FROM ACCOUNTLIST",conn)
         records= cursor.fetchall()
@@ -119,19 +121,31 @@ class AccountList(tornado.web.RequestHandler):
         cursor.close()
         conn.close()
 
-        #for row in records:
-            #print("s1= ", row[0],)
-            #print("s2= ", row[1])
-            #print("s3= ", row[2])
-            #print("s4= ", row[3], "\n")
-
-        self.render("static/result.html",xox=records[0] ,x0x=records[1],x2x=records[2],x3x=records[4],x4x=records[5],bloc="AccountList")
+        
+        #headers = {'Content-Type': 'application/json'}
+        #base_url='http://192.86.32.113:16099/zdih/rest/api/v1/accounts?limit=30'
+        #req = requests.get(base_url, headers=headers, auth=('ibmuser', 'tcs2040'), verify=False)
+        #json_out = req.json()
+        #print("json")
+        #print(json_out)
+        
+           
+        self.render("static/result.html",xox=records[0],x0x=records[1],x2x=records[2],x3x=records[4],x4x=records[5],bloc="AccountList")
 
 
 class AccountTransaction(tornado.web.RequestHandler):
     def post(self):
+        #base_url='http://192.86.32.113:16099/zdih/rest/api/v1/accounts?/transactions?pagingLimit=5&pagingoffset=1'
         account=str(self.get_body_argument('account'))
-         
+        #headers = {'Content-Type': 'application/json'}
+        #end_url= base_url+str(self.get_body_argument("account"))
+        #req = requests.get(end_url, headers=headers, auth=('ibmuser', 'tcs2040'), verify=False)
+        #json_out = req.json()
+        #print("json")
+        #print(json_out)
+        #self.render("static/AccountTransaction.html",Accountno=json_out[0][0] ,currentbal=json_out[0][1] ,credit=json_out[0][2], transid=json_out[0][3],transamt=json_out[0][4],description=json_out[0][5],bloc="AccountTransaction")
+
+
         #connection to the databse 
         conn=pyodbc.connect(
             Trusted_Connection ='YES',
@@ -153,6 +167,17 @@ class AccountTransaction(tornado.web.RequestHandler):
 
 class AccountDetails(tornado.web.RequestHandler):
     def post(self):
+        #base_url='http;//192.867.32.113:16099/zdih/rest/api/v1/accounts=?'
+        #account=str(self.get_body_argument('account'))
+        #headers = {'Content-Type': 'application/json'}
+        #end_url= base_url+str(self.get_body_argument("account"))
+        #req = requests.get(end_url, headers=headers, auth=('ibmuser', 'tcs2040'), verify=False)
+        #json_out = req.json()
+        #print("json")
+        #print(json_out)
+        #self.render("static/AccountDetails.html",accountno= json_out[0][0], balance=json_out[0][1] ,ID= json_out[0][2],bloc="AccountDetails") 
+
+
         account=str(self.get_body_argument('account'))
         conn=pyodbc.connect(
             Trusted_Connection ='YES',

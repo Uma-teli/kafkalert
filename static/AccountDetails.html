@@ -139,7 +139,7 @@
     
    <div class="mort-calculator">
         <div class="top">
-            <h2>Z Digital Integration Hub</h2>
+            <h1>Z Digital Integration Hub</h1>
 
 
             
@@ -168,13 +168,40 @@
                 
                 {% if (bloc == "AccountDetails") %}
                 <h3>Account Details:</h3>
-                <h4> Account No:</h4>
-                <div class="opvalue">{{accountno}}</div>
-                <h4>Available Balance:</h4>
-                <div class="opvalue">{{balance}}
-                <h4>Bank ID:</h4>
-                <div class="opvalue">{{ID}}</div>
+                <!--<h4> Account No:</h4>-->
+                <!--<div class="opvalue">{{accountno}}</div>
+                <div class="opvalue">{{balance}}</div>
+                <div class="opvalue">{{ID}}</div>-->
+                <tr>
+                    <td>Account No:</td>
+            
+                    <td> {{accountno }} </td>
+            
+                </tr>
+                <br>
+                <br>
+                <tr>
+                
+                        <td>Available balance:</td>
+                
+                        <td> {{balance}} </td>
+                
+                    </tr>
+                    <br>
+                    <br>
+                    <tr>
+                
+                        <td>Bank ID:</td>
+                
+                        <td> {{ID}} </td>
+                
+                    </tr>
+                    <br>
+                    <br>
+                    
+                
                 {% end %}
+                </script>
             </div>
           
         </div>
