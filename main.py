@@ -7,6 +7,10 @@ import sys
 import asyncio
 #import psycopg2
 import pyodbc
+import hazelcast
+import logging
+from hazelcast.serialization.api import Portable
+
 
 
 
@@ -96,50 +100,142 @@ class basicRevHandler(tornado.web.RequestHandler):
         #plt.axis('equal')
         #plt.show()
 
-        #self.render("static/result.html",label=labels,color=colors,size=sizes,x1x=json_load['MODELOUT']['MODELOUP']['PROBABILITYX1X'],xox=json_load['MODELOUT']['MODELOUP']['PROBABILITYX0X'],bloc="predictScore", jsonstruct=jsonstruct)
+        #self.render("static/result.html",label=labels,color=colors,size=sizes,x1x=json_load['MODELOU
+        # T']['MODELOUP']['PROBABILITYX1X'],xox=json_load['MODELOUT']['MODELOUP']['PROBABILITYX0X'],bloc="predictScore", jsonstruct=jsonstruct)
         
 class AccountList(tornado.web.RequestHandler):
     def post(self):
 
-        conn=pyodbc.connect(
-            Trusted_Connection ='YES',
-            Driver='{SQL Server}',
-            Server="DESKTOP-QT2Q335\SQLEXPRESS",
-            Database="AccountList"
+        #conn=pyodbc.connect(
+            #Trusted_Connection ='YES',
+            #Driver='{SQL Server}',
+            #Server="DESKTOP-QT2Q335\SQLEXPRESS",
+            #Database="AccountList"
 
-        )
+        #)
 
-        sql_select_Query = "SELECT * FROM ACCOUNTLIST"
-        cursor=conn.cursor()
-        cursor.execute(sql_select_Query)
-        #for row in cursor:
-           #print(row)
+        #sql_select_Query = "SELECT * FROM ACCOUNTLIST"
+        #cursor=conn.cursor()
+        #cursor.execute(sql_select_Query)
+        
+        
+        #json_out= cursor.fetchall()
 
-        #data=pd.real_sql("SELECT * FROM ACCOUNTLIST",conn)
-        records= cursor.fetchall()
+        #cursor.close()
 
-        cursor.close()
-        conn.close()
+        #conn.close()
 
         
         #headers = {'Content-Type': 'application/json'}
         #base_url='http://192.86.32.113:16099/zdih/rest/api/v1/accounts?limit=30'
-        #req = requests.get(base_url, headers=headers, auth=('ibmuser', 'tcs2040'), verify=False)
+        #req = requests.get(base_url, headers=headers, auth=('ibmuser', 'tcs2041'), verify=False)
         #json_out = req.json()
         #print("json")
         #print(json_out)
         
-           
-        self.render("static/result.html",xox=records[0],x0x=records[1],x2x=records[2],x3x=records[4],x4x=records[5],bloc="AccountList")
+        #self.render("static/result.html",len = len(json_out), json_out = json_out,bloc="AccountList") 
+        #self.render("static/result.html",xox=records[0],x0x=records[1],x2x=records[2],x3x=records[4],x4x=records[5],bloc="AccountList")
+        headers = {'Content-Type': 'application/json'}
+        logging.basicConfig(level=logging.INFO)
+        client = hazelcast.HazelcastClient(
+            cluster_name="zdih-tcs",
+            cluster_members=[
+
+                "192.86.32.113:6701",
+                ])
+        #client= hazelcast.HazelcastClient()
+        #account=str(self.get_body_argument('account'))
+        account=int(self.get_argument("account"))
+        print(account)
+        result=client.sql.execute(f"SELECT * FROM TCS001_ACCOUNT WHERE Account_Number= {account} ").result()
+    
+        for row in result:
+            print(row.get_object("Account_Number"))
+            print(row.get_object("Available_Balance"))
+
+            Account_no=row["Account_Number"]
+            balance=row["Available_Balance"]
+       
+        #json_out=json.dumps(result)
+        #print(json_out)
+        
+          
+        self.render("static/result.html",accountno=Account_no,balance=balance,headers=headers,bloc="AccountList")
+        #self.render("static/result.html",accountno=row[0],accountno1=row[1],accountno2=row[2],accountno3=row[3],accountno4=row[4],accountno5=row[5],headers=headers,bloc="AccountList") 
+        
+        
+
+        #my_map = client.get_map("TCS001_ACCOUNT").blocking()
+        #json_out = my_map.get('Account_number')
+        #print(json_out)
+
+        #print(my_map.get("Account_number"))
+
+        #for Account_number in my_map.entry_set().result():
+
+            #print(Account_number)
+
+
+        personnel_map = client.get_map("personnel-map")
+        personnel_map.put("Alice", "IT")
+        personnel_map.put("Bob", "IT")
+        personnel_map.put("Clark", "IT")
+
+        print("Added IT personnel. Printing all known personnel")
+
+        for person, department in personnel_map.entry_set().result():
+             print("%s is in %s department" % (person, department))
+        
+        #for Account_number in my_map:
+             #print(Account_number)
+             
+
+        client.shutdown()
+        #self.render("static/result.html",len = len(json_out), json_out = json_out,bloc="AccountList") 
+        
+        #self.render("static/result.html", accountno = json_out,headers=headers,bloc="AccountList") 
+       
+
+        #sql_select_Query = "SELECT * FROM ACCOUNTLIST"
+        #cursor=client.cursor()
+        #cursor.execute(sql_select_Query)
+        
+        
+        #json_out= cursor.fetchall()
+
+        #cursor.close()
+        
+        #headers = {'Content-Type': 'application/json'}
+        #req = requests.get(AccountList, headers=headers, verify=False)
+        #json_out = req.json()
+        #print("json")
+        #print(json_out)
+        #self.render("static/result.html",len = len(json_out), json_out = json_out,bloc="AccountList") 
+        
+
 
 
 class AccountTransaction(tornado.web.RequestHandler):
     def post(self):
+        logging.basicConfig(level=logging.INFO)
+        client = hazelcast.HazelcastClient(
+            cluster_name="zdih-tcs",
+            cluster_members=[
+
+                "192.86.32.113:6701",
+                ])
+        #client= hazelcast.HazelcastClient()
+        result=client.sql.execute("SELECT * FROM TCS001_TRANSACTION").result()
+        
+        for row in result:
+            print(row.get_object("Account_Number"))
+            print(row.get_object("ID"))
+
         #base_url='http://192.86.32.113:16099/zdih/rest/api/v1/accounts?/transactions?pagingLimit=5&pagingoffset=1'
-        account=str(self.get_body_argument('account'))
+        #account=str(self.get_body_argument('account'))
         #headers = {'Content-Type': 'application/json'}
         #end_url= base_url+str(self.get_body_argument("account"))
-        #req = requests.get(end_url, headers=headers, auth=('ibmuser', 'tcs2040'), verify=False)
+        #req = requests.get(end_url, headers=headers, auth=('ibmuser', 'tcs2041'), verify=False)
         #json_out = req.json()
         #print("json")
         #print(json_out)
@@ -147,33 +243,33 @@ class AccountTransaction(tornado.web.RequestHandler):
 
 
         #connection to the databse 
-        conn=pyodbc.connect(
-            Trusted_Connection ='YES',
-            Driver='{SQL Server}',
-            Server="DESKTOP-QT2Q335\SQLEXPRESS",
-            Database="AccountList"
+        #conn=pyodbc.connect(
+           # Trusted_Connection ='YES',
+           # Driver='{SQL Server}',
+           # Server="DESKTOP-QT2Q335\SQLEXPRESS",
+           # Database="AccountList"
 
-        )
-        sql_select_Query = "SELECT * FROM AccountTransaction WHERE ACCOUNT_NO=%s"%account
-        cursor=conn.cursor()
-        cursor.execute(sql_select_Query)
+        #)
+        #sql_select_Query = "SELECT * FROM AccountTransaction WHERE ACCOUNT_NO=%s"%account
+        #cursor=conn.cursor()
+        #cursor.execute(sql_select_Query)
 
-        records= cursor.fetchall()
+       # records= cursor.fetchall()
 
-        cursor.close()
-        conn.close()
+        #cursor.close()
+        #conn.close()
 
-        self.render("static/AccountTransaction.html",Accountno=records[0][0] ,currentbal=records[0][1] ,credit=records[0][2], transid=records[0][3],transamt=records[0][4],description=records[0][5],bloc="AccountTransaction")
+        #self.render("static/AccountTransaction.html",Accountno=records[0][0] ,currentbal=records[0][1] ,credit=records[0][2], transid=records[0][3],transamt=records[0][4],description=records[0][5],bloc="AccountTransaction")
 
 class AccountDetails(tornado.web.RequestHandler):
     def post(self):
-        #base_url='http;//192.867.32.113:16099/zdih/rest/api/v1/accounts=?'
+        # base_url='http//192.867.32.113:16099/zdih/rest/api/v1/accounts='
         #account=str(self.get_body_argument('account'))
         #headers = {'Content-Type': 'application/json'}
         #end_url= base_url+str(self.get_body_argument("account"))
-        #req = requests.get(end_url, headers=headers, auth=('ibmuser', 'tcs2040'), verify=False)
+        #req = requests.get(end_url, headers=headers, auth=('ibmuser', 'tcs2041'), verify=False)
         #json_out = req.json()
-        #print("json")
+       # print("json")
         #print(json_out)
         #self.render("static/AccountDetails.html",accountno= json_out[0][0], balance=json_out[0][1] ,ID= json_out[0][2],bloc="AccountDetails") 
 

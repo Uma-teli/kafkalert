@@ -27,10 +27,13 @@
     background: #14213d;
     color: #fff;
     padding: 32px;
+    height: 500px;
  }
 
 .mort-calculator .top h2 {
     margin-top: 0;
+    text-align: center;
+   
 }
 
 .mort-calculator form {
@@ -72,6 +75,7 @@
     font-weight: 400;
     padding: 8px 24px;
     padding-bottom: 10px;
+    
    /* #width: 100%;
    # border-bottom: 1px solid rgba(20, 33, 61, 0.2);*/
 }
@@ -84,6 +88,7 @@
     font-weight: 400;
     margin-right: 6px;
     opacity: 0.4;
+    
 }
 
 .mort-calculator .calculate-btn {
@@ -131,6 +136,7 @@
     <div class="mort-calculator">
         <div class="top">
             <h2>Z Digital Integration Hub</h2>
+        
 
             <!---<form action="predictScore" method="POST">
                 <div class="group">
@@ -213,12 +219,29 @@
                 </div>
                 
                 {% if (bloc == "AccountList") %}
-                <h3> AccountNo List:</h3>
-                <div class="opvalue">{{xox}}</div>
-                <div class="opvalue">{{x0x}}</div>
-                <div class="opvalue">{{x2x}}</div>
-                <div class="opvalue">{{x3x}}</div>
-                <div class="opvalue">{{x4x}}</div>
+                <h3> Account Information:</h3>
+            
+
+                <tr>
+                    <td>Account No:</td>
+            
+                    <td> {{accountno }} </td>
+            
+                </tr><br>
+                <br>
+
+                <tr>
+                
+                    <td>Available balance:</td>
+            
+                    <td> {{balance}} </td>
+            
+                </tr>
+                
+                
+                
+                
+                
                 {% end %}
             </div>
           
