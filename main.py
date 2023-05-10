@@ -6,10 +6,9 @@ import tornado.autoreload
 import sys
 import asyncio
 #import psycopg2
-import pyodbc
 import hazelcast
 import logging
-from hazelcast.serialization.api import Portable
+
 
 
 
