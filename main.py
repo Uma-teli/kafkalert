@@ -137,29 +137,35 @@ class AccountList(tornado.web.RequestHandler):
         headers = {'Content-Type': 'application/json'}
         logging.basicConfig(level=logging.INFO)
         client = hazelcast.HazelcastClient(
-            cluster_name="zdih-tcs",
-            cluster_members=[
-
-                "192.86.32.113:6701",
+                cluster_name="zdih-tcs",
+                cluster_members=[
+                            "192.86.32.113:6701",
                 ])
         #client= hazelcast.HazelcastClient()
         #account=str(self.get_body_argument('account'))
         account=int(self.get_argument("account"))
         print(account)
-        result=client.sql.execute(f"SELECT * FROM TCS001_ACCOUNT WHERE Account_Number= {account} ").result()
-    
-        for row in result:
-            print(row.get_object("Account_Number"))
-            print(row.get_object("Available_Balance"))
+        #result=client.sql.execute(f"SELECT * FROM TCS001_ACCOUNT WHERE Account_Number= {account} ").result()
+        result1=client.sql.execute(f"SELECT * FROM TCS001_TRANSACTION WHERE Account_Number= {account} ").result()
+        
 
-            Account_no=row["Account_Number"]
-            balance=row["Available_Balance"]
+        for row in result1:
+                print(row.get_object("Account_Number"))
+                print(row.get_object("Available_Balance"))
+                Account_no=row["Account_Number"]
+                balance=row["Available_Balance"]
+                self.render("static/result.html",accountno=Account_no,balance=balance,headers=headers,bloc="AccountList")
+       
+        #else:       
+            #outVal = 'Account number does not exists'
+            #self.render("static/AccountNotExists.html",outVal = outVal ,bloc="AccountList")
+        #self.render("static/result.html",accountno=row[0],accountno1=row[1],accountno2=r
        
         #json_out=json.dumps(result)
-        #print(json_out)
-        
+
+        #print(json_out)s
           
-        self.render("static/result.html",accountno=Account_no,balance=balance,headers=headers,bloc="AccountList")
+        #sself.render("static/result.html",accountno=Account_no,balance=balance,outval=outval,headers=headers,bloc="AccountList")
         #self.render("static/result.html",accountno=row[0],accountno1=row[1],accountno2=row[2],accountno3=row[3],accountno4=row[4],accountno5=row[5],headers=headers,bloc="AccountList") 
         
         
@@ -175,20 +181,8 @@ class AccountList(tornado.web.RequestHandler):
             #print(Account_number)
 
 
-        personnel_map = client.get_map("personnel-map")
-        personnel_map.put("Alice", "IT")
-        personnel_map.put("Bob", "IT")
-        personnel_map.put("Clark", "IT")
-
-        print("Added IT personnel. Printing all known personnel")
-
-        for person, department in personnel_map.entry_set().result():
-             print("%s is in %s department" % (person, department))
         
-        #for Account_number in my_map:
-             #print(Account_number)
-             
-
+       
         client.shutdown()
         #self.render("static/result.html",len = len(json_out), json_out = json_out,bloc="AccountList") 
         
@@ -223,12 +217,67 @@ class AccountTransaction(tornado.web.RequestHandler):
 
                 "192.86.32.113:6701",
                 ])
-        #client= hazelcast.HazelcastClient()
-        result=client.sql.execute("SELECT * FROM TCS001_TRANSACTION").result()
         
-        for row in result:
+        act=int(self.get_argument("act"))
+        print(act)
+        damt=int(self.get_argument("damt"))
+        print(damt)
+        camt=int(self.get_argument("camt"))
+        print(camt)
+
+        #result=client.sql.execute(f"SELECT * FROM TCS001_TRANSACTION WHERE Account_Number= {act} ").result()
+        
+        #if result:
+            ##print(row.get_object("Account_Number"))
+                #print(row.get_object("Available_Balance"))
+                #Account_no=row["Account_Number"]
+                #balance=row["Available_Balance"]
+                #self.render("static/AccountTransaction.html",Accountno=Account_no,balance=balance,bloc="AccountTransaction")
+       
+
+       
+       
+
+       
+        result1=client.sql.execute(f"SELECT * FROM TCS001_TRANSACTION WHERE Account_Number= {act}").result()
+        for row in result1:
+            print(row.get_object("Available_Balance"))
             print(row.get_object("Account_Number"))
-            print(row.get_object("ID"))
+            Account_no=row["Account_Number"]
+            balance=row["Available_Balance"]
+
+
+        balance1=balance+damt
+        result1=client.sql.execute(f"UPDATE TCS001_TRANSACTION SET Available_Balance= {balance1} WHERE Account_Number={act}").result()
+        result2=client.sql.execute(f"SELECT * FROM TCS001_TRANSACTION WHERE Account_Number= {act}").result()
+        for row in result2:
+            print(row.get_object("Available_Balance"))
+            b=row["Available_Balance"]
+
+        self.render("static/AccountTransaction.html",Accountno=Account_no,balance=b,bloc="AccountTransaction")
+       
+        balance2=balance-camt
+        client.sql.execute(f"UPDATE TCS001_TRANSACTION SET Available_Balance= {balance2} WHERE Account_Number={act}").result()
+        result4=client.sql.execute(f"SELECT * FROM TCS001_TRANSACTION WHERE Account_Number= {act}").result()
+        for row in result4:
+            print(row.get_object("Available_Balance"))
+            #b=row["Available_Balance"]
+
+
+
+            
+        #self.render("static/AccountTransaction.html",)
+        #result=client.sql.execute(f"SELECT * FROM TCS001_TRANSACTION WHERE Account_Number= {act} AND CREDITORDEBIT:'c").result() 
+        
+        #for row in result:
+            #print(row.get_object("Account_Number"))
+            #print(row.get_object("Available_Balance"))
+            #Account_no=row["Account_Number"]
+            #balance=row["Available_Balance"]
+            #self.render("static/AccountTransaction.html",Accountno=Account_no,balance=balance,bloc="AccountTransaction")
+       
+       
+        
 
         #base_url='http://192.86.32.113:16099/zdih/rest/api/v1/accounts?/transactions?pagingLimit=5&pagingoffset=1'
         #account=str(self.get_body_argument('account'))
@@ -262,7 +311,7 @@ class AccountTransaction(tornado.web.RequestHandler):
 
 class AccountDetails(tornado.web.RequestHandler):
     def post(self):
-        # base_url='http//192.867.32.113:16099/zdih/rest/api/v1/accounts='
+        base_url='http//192.867.32.113:16099/zdih/rest/api/v1/accounts='
         #account=str(self.get_body_argument('account'))
         #headers = {'Content-Type': 'application/json'}
         #end_url= base_url+str(self.get_body_argument("account"))
@@ -273,23 +322,13 @@ class AccountDetails(tornado.web.RequestHandler):
         #self.render("static/AccountDetails.html",accountno= json_out[0][0], balance=json_out[0][1] ,ID= json_out[0][2],bloc="AccountDetails") 
 
 
-        account=str(self.get_body_argument('account'))
-        conn=pyodbc.connect(
-            Trusted_Connection ='YES',
-            Driver='{SQL Server}',
-            Server="DESKTOP-QT2Q335\SQLEXPRESS",
-            Database="AccountList"
+        ###cursor=conn.cursor()
+        ##records= cursor.fetchall()
 
-        )
-        sql_select_Query = "SELECT * FROM AccountDetails WHERE ACCOUNT_NO=%s"%account
-        cursor=conn.cursor()
-        cursor.execute(sql_select_Query)
-        records= cursor.fetchall()
+        #cursor.close()
+        #conn.close()
 
-        cursor.close()
-        conn.close()
-
-        self.render("static/AccountDetails.html",accountno=records[0][0], balance=records[0][1] ,ID=records[0][2],bloc="AccountDetails") 
+        #self.render("static/AccountDetails.html",accountno=records[0][0], balance=records[0][1] ,ID=records[0][2],bloc="AccountDetails") 
 
 
 
@@ -299,6 +338,7 @@ if __name__ == "__main__":
         (r"/AccountList", AccountList),
         (r"/AccountDetails",AccountDetails),
         (r"/AccountTransaction",AccountTransaction)
+        
 
     ])
     print("commit")

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mortgage Calc</title>
+    <title>zdih</title>
     <!--<link href="style.css" rel="stylesheet" >-->
     <style>
          .mort-calculator {
@@ -27,7 +27,7 @@
     background: #14213d;
     color: #fff;
     padding: 32px;
-    height: 500px;
+    height: 400px;
  }
 
 .mort-calculator .top h2 {
@@ -64,10 +64,11 @@
     padding: 8px 32px;
 }
 
-.mort-calculator .left h3{
+.mort-calculator .left h2{
     font-size: 16px;
     font-weight: 400;
     margin-bottom: 8px;
+    padding-top: 30px;
 }
 
 .mort-calculator .result .value{
@@ -100,7 +101,21 @@
     font-size: 18px;
     font-weight: 900;
     cursor: pointer;
-    margin: 24px 0;
+    margin: 26px 0;
+}
+
+.mort-calculator .button{
+    background: #e63946;
+    color: #fff;
+    border: none;
+    font-size: 18px;
+    font-weight: 900;
+    padding: 8px 32px;
+    border-radius: 8px;
+    margin: 26px 0px;
+    margin-left: 25px;
+     
+
 }
 
 .mort-calculator .result .opvalue{
@@ -135,7 +150,7 @@
     
     <div class="mort-calculator">
         <div class="top">
-            <h2>Z Digital Integration Hub</h2>
+            <h2>Financial Partner Bank</h2>
         
 
             <!---<form action="predictScore" method="POST">
@@ -219,6 +234,7 @@
                 </div>
                 
                 {% if (bloc == "AccountList") %}
+                <br>
                 <h3> Account Information:</h3>
             
 
@@ -227,8 +243,8 @@
             
                     <td> {{accountno }} </td>
             
-                </tr><br>
-                <br>
+                </tr><br><br>
+                
 
                 <tr>
                 
@@ -237,12 +253,12 @@
                     <td> {{balance}} </td>
             
                 </tr>
-                
-                
-                
-                
-                
                 {% end %}
+                <br>
+                
+                
+                    <input class=button type="button" value="Back" onclick="history.go(-1)">
+                 
             </div>
           
         </div>
