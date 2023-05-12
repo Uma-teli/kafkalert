@@ -26,7 +26,7 @@
  }
 
  .mort-calculator .top {
-    background: #14213d;
+    background: #141b3d;
     color: #fff;
     padding: 32px;
     height: 500px;
@@ -35,6 +35,7 @@
 .mort-calculator .top h2 {
     margin-top: 0;
     text-align: center;
+   
 }
 
 .mort-calculator form {
@@ -69,6 +70,7 @@
     font-size: 16px;
     font-weight: 400;
     margin-bottom: 8px;
+    
 }
 
 .mort-calculator .result .value{
@@ -109,6 +111,21 @@
     margin: 24px 0;
 }
 
+.mort-calculator .button{
+    background: #e63946;
+    color: #fff;
+    border: none;
+    font-size: 18px;
+    font-weight: 900;
+    padding: 8px 32px;
+    border-radius: 8px;
+    margin: 26px 0px;
+    margin-left: 25px;
+     
+
+}
+
+
 .mort-calculator .result .opvalue{
     font-size: 20px;
     font-weight: 900;
@@ -139,9 +156,24 @@
 </head>
 <body>
     
-   <div class="mort-calculator">
+    <div class="mort-calculator">
         <div class="top">
             <h2>Z Digital Integration Hub</h2>
+                <!--<form action ="AccountTransaction" method =post>
+                    <div class="total-amount">
+                    <h4>Account Transaction:</h4>
+                    <h3>accountno:</h3>-->
+                        <!-- <div class="value">1</div>-->
+                    <!--<input type="text" value="" placeholder="Enter account no" name="account" class="value" />
+                     
+                    <h3>Deposit amt:</h3>-->
+               <!-- <div class="value">1</div>-->
+                    <!--<input type="text" value=""  name="account" class="value" />
+            
+            <button class="calculate-btn">SUBMIT</button>
+                   </div>-->
+           
+                </form>
 
 
             
@@ -159,51 +191,40 @@
             <div class="right">
                 <div class="output">
                     <div class="mort-emi">
-                        <!--<h3>Model Prediction</h3>
-                        {% if (bloc == '') %}
-                            
-
                         
-                        {% end %}-->
+                        
                     </div>
                 </div>
                 
                 {% if (bloc == "AccountDetails") %}
-                <h3>Account Details:</h3>
-                <!--<h4> Account No:</h4>-->
-                <!--<div class="opvalue">{{accountno}}</div>
-                <div class="opvalue">{{balance}}</div>
-                <div class="opvalue">{{ID}}</div>-->
-                <tr>
-                    <td>Account No:</td>
-            
-                    <td> {{accountno }} </td>
-            
-                </tr>
-                <br>
-                <br>
-                <tr>
+                <h3>Account Information:</h3>
                 
-                        <td>Available balance:</td>
+                   <h3>Account No:</h3>
                 
-                        <td> {{balance}} </td>
+                   <div class="opvalue">{{accountno}}</div>
+                   <br>
+
+                   <h3>Available balance:</h3>
+                   <div class="opvalue">{{balance}}</div>
                 
-                    </tr>
-                    <br>
-                    <br>
-                    <tr>
                 
-                        <td>Bank ID:</td>
-                
-                        <td> {{ID}} </td>
-                
-                    </tr>
-                    <br>
-                    <br>
                     
+               
                 
+
+                   
+                    
+
+                
+            
+                
+            
+               
+            
                 {% end %}
-                </script>
+                
+                
+                <input class=button type="button" value="Back" onclick="history.go(-1)">
             </div>
           
         </div>

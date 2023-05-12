@@ -197,24 +197,15 @@
                 </div>
                 
                 {% if (bloc == "AccountTransaction") %}
-                <h3>Account Transaction:</h3>
+                <h3>Account Information:</h3>
                 
-                <tr>
-                        <td>Account No:</td>
-                
-                        <td> {{Accountno }} </td>
-                
-                 </tr><br><br>
-                
-                    
-                <tr>
-
-                    <td>Available balance:</td>
+                   <h3>Account No:</h3>
+                   <div class="opvalue">{{Accountno}}</div>
+                   <br>
+                   <h3>Available Balance:</h3>
+                   <div class="opvalue">{{balance}}</div>
             
-                    <td> {{ balance }} </td>
-            
-                </tr>
-                
+                   
 
                    
                     
@@ -226,7 +217,7 @@
                
             
                 {% end %}
-                <br>
+                
                 
                 <input class=button type="button" value="Back" onclick="history.go(-1)">
             </div>

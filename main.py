@@ -222,8 +222,6 @@ class AccountTransaction(tornado.web.RequestHandler):
         print(act)
         damt=int(self.get_argument("damt"))
         print(damt)
-        camt=int(self.get_argument("camt"))
-        print(camt)
 
         #result=client.sql.execute(f"SELECT * FROM TCS001_TRANSACTION WHERE Account_Number= {act} ").result()
         
@@ -248,19 +246,26 @@ class AccountTransaction(tornado.web.RequestHandler):
 
 
         balance1=balance+damt
-        result1=client.sql.execute(f"UPDATE TCS001_TRANSACTION SET Available_Balance= {balance1} WHERE Account_Number={act}").result()
-        result2=client.sql.execute(f"SELECT * FROM TCS001_TRANSACTION WHERE Account_Number= {act}").result()
-        for row in result2:
+        client.sql.execute(f"UPDATE TCS001_TRANSACTION SET Available_Balance= {balance1} WHERE Account_Number={act}").result()
+        result3=client.sql.execute(f"SELECT * FROM TCS001_TRANSACTION WHERE Account_Number= {act}").result()
+        for row in result3:
             print(row.get_object("Available_Balance"))
             b=row["Available_Balance"]
+            
 
         self.render("static/AccountTransaction.html",Accountno=Account_no,balance=b,bloc="AccountTransaction")
        
-        balance2=balance-camt
-        client.sql.execute(f"UPDATE TCS001_TRANSACTION SET Available_Balance= {balance2} WHERE Account_Number={act}").result()
-        result4=client.sql.execute(f"SELECT * FROM TCS001_TRANSACTION WHERE Account_Number= {act}").result()
-        for row in result4:
-            print(row.get_object("Available_Balance"))
+        #balance2=balance-camt
+        #client.sql.execute(f"UPDATE TCS001_TRANSACTION SET Available_Balance= {balance2} WHERE Account_Number={act}").result()
+        #result4=client.sql.execute(f"SELECT * FROM TCS001_TRANSACTION WHERE Account_Number= {act}").result()
+        #for row in result4:
+            #print(row.get_object("Available_Balance"))
+            #b=row["Available_Balance"]
+            
+
+
+
+        #self.render("static/AccountTransaction.html",Accountno=Account_no,balance=balance,bloc="AccountTransaction")
             #b=row["Available_Balance"]
 
 
@@ -311,7 +316,40 @@ class AccountTransaction(tornado.web.RequestHandler):
 
 class AccountDetails(tornado.web.RequestHandler):
     def post(self):
-        base_url='http//192.867.32.113:16099/zdih/rest/api/v1/accounts='
+        logging.basicConfig(level=logging.INFO)
+        client = hazelcast.HazelcastClient(
+            cluster_name="zdih-tcs",
+            cluster_members=[
+
+                "192.86.32.113:6701",
+                ])
+        
+        acct=int(self.get_argument("acct"))
+        print(acct)
+        camt=int(self.get_argument("camt"))
+        print(camt)
+       
+        result1=client.sql.execute(f"SELECT * FROM TCS001_TRANSACTION WHERE Account_Number= {acct}").result()
+        for row in result1:
+            print(row.get_object("Available_Balance"))
+            print(row.get_object("Account_Number"))
+            Account_no=row["Account_Number"]
+            balance=row["Available_Balance"]
+
+
+
+        balance2=balance-camt
+        client.sql.execute(f"UPDATE TCS001_TRANSACTION SET Available_Balance= {balance2} WHERE Account_Number={acct}").result()
+        result4=client.sql.execute(f"SELECT * FROM TCS001_TRANSACTION WHERE Account_Number= {acct}").result()
+        for row in result4:
+            print(row.get_object("Available_Balance"))
+            b=row["Available_Balance"]
+
+        self.render("static/AccountDetails.html",accountno=Account_no,balance=b,bloc="AccountDetails")
+       
+            
+
+        #base_url='http//192.867.32.113:16099/zdih/rest/api/v1/accounts='
         #account=str(self.get_body_argument('account'))
         #headers = {'Content-Type': 'application/json'}
         #end_url= base_url+str(self.get_body_argument("account"))

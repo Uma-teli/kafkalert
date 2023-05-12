@@ -27,7 +27,7 @@
     background: #14213d;
     color: #fff;
     padding: 32px;
-    height:600px;
+    height:750px;
  }
 
 .mort-calculator .top h2 {
@@ -179,24 +179,35 @@
 
                  <form action ="AccountTransaction" method =post>
                     <div class="amount">
-                        <h3>Account Transaction:</h3>
+                        <h3>Deposit:</h3>
                         <!--<h3>accountno:</h3>-->
-                        <input type="text" value="" placeholder="Enter Account no" name="act" class="value" />
+                        <input type="text" value="" placeholder="Account no" name="act" class="value" />
                     </div><br>
                         
                             
                     
                     <div class="amount">
                         <!--<h3>Deposit amt:</h3>-->
-                            <input type="text" value="" placeholder="Enter deposit amt" name="damt" class="value" />
+                            <input type="text" value="" placeholder="deposit amt" name="damt" class="value" />
                        
                         </div>
-                        <br>
+                        <button class="calculate-btn">SUBMIT</button>   
+                        
+                    </form>
                        
+                
 
-                    <div class="amount">
+                <form action ="AccountDetails" method =post>
+
+                    <div class="details">
+                        <h3>Withdraw:</h3>
+                        <!--<h3>accountno:</h3>-->
+                        <input type="text" value="" placeholder="Account no" name="acct" class="value" />
+                    </div><br>
+                    
+                    <div class="details">
                             <!--<h3>Deposit amt:</h3>-->
-                        <input type="text" value="" placeholder="Enter credit amt" name="camt" class="value" />
+                        <input type="text" value="" placeholder="credit amt" name="camt" class="value" />
                            
                         </div>
                             <button class="calculate-btn">SUBMIT</button>   
