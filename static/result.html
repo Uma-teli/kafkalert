@@ -27,7 +27,7 @@
     background: #14213d;
     color: #fff;
     padding: 32px;
-    height: 400px;
+    height: 500px;
  }
 
 .mort-calculator .top h2 {
@@ -118,6 +118,10 @@
 
 }
 
+.mort-calculator .button:hover{
+    color: black;
+}
+
 .mort-calculator .result .opvalue{
     font-size: 20px;
     font-weight: 900;
@@ -150,109 +154,37 @@
     
     <div class="mort-calculator">
         <div class="top">
-            <h2>Z Digital Integration Hub</h2>
+            <h2>Fintech Application</h2>
         
 
-            <!---<form action="predictScore" method="POST">
-                <div class="group">
-                    <div class="title">Amount</div>
-                    <input type="text" value="2.814210" name="amt" class="mort-amount" />
-                </div>
-
-                <div class="group">
-                    <div class="title">Card</div>
-                    <input type="text" value="1" name="card" class="interest-rate" />
-                </div>
-
-
-                <div class="group">
-                    <div class="title">Errors</div>
-                    <input type="text" value="0" name="err" class="mort-tenure" />
-                </div>
-
-                
             
-        </div>
 
 
 
-        <div class="result">
-            <div class="left">
-                <div class="mort-emi">
-                    <h3>MCC</h3>-->
-                   <!--- <div class="value">123</div>-->
-                   <!--- <input type="text" value="75" name="mcc" class="value" />
-                </div>
+        <div class="right">
+            <div class="output">
+                <div class="mort-emi">            
 
-                <div class="total-interest">
-                    <h3>Merchant City</h3>-->
-                   <!-- <div class="value">486</div>-->
-                    <!--<input type="text" value="486" name="mercity" class="value" />
-                </div>
-
-
-                <div class="total-amount">
-                    <h3>Merchant Name</h3>-->
-                  <!--  <div class="value">25679</div>-->
-                   <!--- <input type="text" value="25679"  name="mername" class="value" />
-                </div>
-
-                <div class="total-amount">
-                    <h3>Merchant State</h3>-->
-                  <!--  <div class="value">64</div>-->
-                   <!--- <input type="text" value="64" name="merstate"class="value" />
-                </div>
-
-                <div class="total-amount">
-                    <h3>Use Chip</h3>-->
-                    <!--<input type="text" value="2" name="chip" class="value" />
-                </div>
-
-                <div class="total-amount">
-                    <h3>User</h3>-->
-                   <!-- <div class="value">1</div>-->
-                    <!--<input type="text" value="1" name="usr" class="value" />
-                </div>
-
-
-
-
-                <button class="calculate-btn">Calculate</button>
-            </form>
-            </div>-->
-
-            <div class="right">
-                <div class="output">
-                    <div class="mort-emi">
-                        <!--<h3>Model Prediction</h3>-->
-                        <!--{% if (bloc == 'AccountList') %}
-                            
-
-                        
-                        {% end %}-->
+           
                     </div>
                 </div>
+
+   
                 
                 {% if (bloc == "AccountList") %}
                 <br>
-                <h3> Account Information:</h3>
-            
-
-                <tr>
-                    <td>Account No:</td>
-            
-                    <td> {{accountno }} </td>
-            
-                </tr><br><br>
+                <h3> List of Accounts:</h3>
+                
+                <ul>
+                <li><div class="opvalue">{{xox}}</div><br></li>
+                <li><div class="opvalue">{{x0x}}</div><br></li>
+                <li><div class="opvalue">{{x2x}}</div><br></li>
+                <li><div class="opvalue">{{x3x}}</div><br></li>
+                <li><div class="opvalue">{{x4x}}</div></li>
+                </ul>
                 
 
-                <tr>
-                
-                    <td>Available balance:</td>
-            
-                    <td> {{balance}} </td>
-            
-                </tr>
+                    
                 {% end %}
                 <br>
                 

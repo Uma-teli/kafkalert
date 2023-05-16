@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Credit Evaluation</title>
+    <title>zdih</title>
     <!--<link href="style.css" rel="stylesheet" >-->
     <style>
          .mort-calculator {
@@ -125,6 +125,10 @@
 
 }
 
+.mort-calculator .button:hover{
+    color: black;
+}
+
 
 .mort-calculator .result .opvalue{
     font-size: 20px;
@@ -158,7 +162,7 @@
     
     <div class="mort-calculator">
         <div class="top">
-            <h2>Z Digital Integration Hub</h2>
+            <h2>Fintech Application</h2>
                 <!--<form action ="AccountTransaction" method =post>
                     <div class="total-amount">
                     <h4>Account Transaction:</h4>
@@ -173,7 +177,7 @@
             <button class="calculate-btn">SUBMIT</button>
                    </div>-->
            
-                </form>
+                
 
 
             
@@ -196,16 +200,19 @@
                     </div>
                 </div>
                 
-                {% if (bloc == "AccountDetails") %}
-                <h3>Account Information:</h3>
+                    {% if (bloc == "AccountDetails") %}
+                        <h3>Account Details:</h3>
                 
-                   <h3>Account No:</h3>
-                
-                   <div class="opvalue">{{accountno}}</div>
-                   <br>
+                        <h3>Account No:</h3>
+                        <div class="opvalue">{{accountno}}</div>
+                        <br>
 
-                   <h3>Available balance:</h3>
-                   <div class="opvalue">{{balance}}</div>
+                        <h3>Available Balance:</h3>
+                        <div class="opvalue">{{balance}}</div>
+                        <br>
+
+                        <h3>Bank ID:</h3>
+                        <div class="opvalue">{{ID}}</div>
                 
                 
                     
@@ -221,10 +228,10 @@
             
                
             
-                {% end %}
+                    {% end %}
                 
                 
-                <input class=button type="button" value="Back" onclick="history.go(-1)">
+                         <input class=button type="button" value="Back" onclick="history.go(-1)">
             </div>
           
         </div>
