@@ -8,11 +8,8 @@ import sys
 import asyncio
 #import psycopg2
 from kafka import KafkaConsumer
-#from kafka import  KafkaProducer
-#import ksql
-
 from kafka import TopicPartition
-from json import loads
+
 
 
 
