@@ -11,9 +11,9 @@ from kafka import KafkaConsumer
 #from kafka import  KafkaProducer
 #import ksql
 
-from kafka import TopicPartition,OffsetAndMetadata
+from kafka import TopicPartition
 from json import loads
-import re
+
 
 
 
