@@ -6,6 +6,10 @@ import tornado.autoreload
 import sys
 import asyncio
 #import psycopg2
+#from kafka import KafkaConsumer
+from kafka import  KafkaProducer
+from time import sleep
+from json import dumps
 
 
 
@@ -63,16 +67,38 @@ class basicRevHandler(tornado.web.RequestHandler):
         
 class AccountList(tornado.web.RequestHandler):
     def post(self):
-        headers = {'Content-Type': 'application/json'}
-        base_url='http://169.38.75.202:8085/zdih/rest/api/v1/accounts?limit=5'
-        req = requests.get(base_url, headers=headers,  verify=False)
-        json_out = req.json()
-        print("json")
-        print(json_out)
+        #headers = {'Content-Type': 'application/json'}
+        #base_url='http://169.38.75.202:8085/zdih/rest/api/v1/accounts?limit=5'
+        #req = requests.get(base_url, headers=headers,  verify=False)
+        #json_out = req.json()
+        #print("json")
+        #print(json_out)
         
         #self.render("static/result.html",len = len(json_out), json_out = json_out,headers=headers,bloc="AccountList") 
-        self.render("static/result.html",xox=json_out['accounts'][0],x0x=json_out['accounts'][1],x2x=json_out['accounts'][2],x3x=json_out['accounts'][3],x4x=json_out['accounts'][4],headers=headers,bloc="AccountList")
-        
+        #self.render("static/result.html",xox=json_out['accounts'][0],x0x=json_out['accounts'][1],x2x=json_out['accounts'][2],x3x=json_out['accounts'][3],x4x=json_out['accounts'][4],headers=headers,bloc="AccountList")
+       
+
+        # Define server with port
+        bootstrap_servers = ['169.38.75.202:9092']
+
+        # Define topic name where the message will publishpython main.py
+
+        topicName = 'TCS001_ACCOUNT'
+
+        # Initialize producer variable
+        producer = KafkaProducer(bootstrap_servers = bootstrap_servers,value_serializer=lambda x: dumps(x).encode('utf-8'))
+        #producer = KafkaProducer(bootstrap_servers = bootstrap_servers)
+        # Publish text in defined topic
+        #producer.send(topicName, b'h')
+        #for e in range(2):
+        data = {'Bank_ID ': 900, 'Account_Number':678934561000,'Transaction_Count':0,'Available_Balance':2000.00}
+        producer.send(topicName, value=data)
+        sleep(5)
+
+        # Print message
+
+        print("Message Sent")
+
         
              
 

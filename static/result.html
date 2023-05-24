@@ -27,12 +27,13 @@
     background: #14213d;
     color: #fff;
     padding: 32px;
-    height: 500px;
+    height: 450px;
  }
 
 .mort-calculator .top h2 {
     margin-top: 0;
     text-align: center;
+    
    
 }
 
@@ -113,7 +114,7 @@
     padding: 8px 32px;
     border-radius: 8px;
     margin: 26px 0px;
-    margin-left: 25px;
+   /* margin-left: 25px;*/
      
 
 }
@@ -127,6 +128,13 @@
     font-weight: 900;
     padding-bottom: 10px;
     border-bottom: 1px solid rgba(20, 33, 61, 0.2);
+}
+.mort-calculator .right h3{
+    font-size: 20px;
+}
+
+.mort-calculator .right h4{
+    font-size: 20px;
 }
 
 
@@ -157,36 +165,102 @@
             <h2>Fintech Application</h2>
         
 
-            
-
-
-
-        <div class="right">
-            <div class="output">
-                <div class="mort-emi">            
-
-           
-                    </div>
+            <!---<form action="predictScore" method="POST">
+                <div class="group">
+                    <div class="title">Amount</div>
+                    <input type="text" value="2.814210" name="amt" class="mort-amount" />
                 </div>
 
-   
+                <div class="group">
+                    <div class="title">Card</div>
+                    <input type="text" value="1" name="card" class="interest-rate" />
+                </div>
+
+
+                <div class="group">
+                    <div class="title">Errors</div>
+                    <input type="text" value="0" name="err" class="mort-tenure" />
+                </div>
+
+                
+            
+        </div>
+
+
+
+        <div class="result">
+            <div class="left">
+                <div class="mort-emi">
+                    <h3>MCC</h3>-->
+                   <!--- <div class="value">123</div>-->
+                   <!--- <input type="text" value="75" name="mcc" class="value" />
+                </div>
+
+                <div class="total-interest">
+                    <h3>Merchant City</h3>-->
+                   <!-- <div class="value">486</div>-->
+                    <!--<input type="text" value="486" name="mercity" class="value" />
+                </div>
+
+
+                <div class="total-amount">
+                    <h3>Merchant Name</h3>-->
+                  <!--  <div class="value">25679</div>-->
+                   <!--- <input type="text" value="25679"  name="mername" class="value" />
+                </div>
+
+                <div class="total-amount">
+                    <h3>Merchant State</h3>-->
+                  <!--  <div class="value">64</div>-->
+                   <!--- <input type="text" value="64" name="merstate"class="value" />
+                </div>
+
+                <div class="total-amount">
+                    <h3>Use Chip</h3>-->
+                    <!--<input type="text" value="2" name="chip" class="value" />
+                </div>
+
+                <div class="total-amount">
+                    <h3>User</h3>-->
+                   <!-- <div class="value">1</div>-->
+                    <!--<input type="text" value="1" name="usr" class="value" />
+                </div>
+
+
+
+
+                <button class="calculate-btn">Calculate</button>
+            </form>
+            </div>-->
+
+            <div class="right">
+                <div class="output">
+                    <div class="mort-emi">
+                        <!--<h3>Model Prediction</h3>-->
+                        <!--{% if (bloc == 'AccountList') %}
+                            
+
+                        
+                        {% end %}-->
+                    </div>
+                </div>
                 
                 {% if (bloc == "AccountList") %}
-                <br>
-                <h3> List of Accounts:</h3>
+            
+                <h3> Account Information:</h3>
+            
+                <h4>Account Number:</h4>
+                <div class="opvalue">{{accountno}}</div><br>
+
+                <h4>Available Balance:</h4>
+                <div class="opvalue">{{balance}}</div>
+
                 
-                <ul>
-                <li><div class="opvalue">{{xox}}</div><br></li>
-                <li><div class="opvalue">{{x0x}}</div><br></li>
-                <li><div class="opvalue">{{x2x}}</div><br></li>
-                <li><div class="opvalue">{{x3x}}</div><br></li>
-                <li><div class="opvalue">{{x4x}}</div></li>
-                </ul>
                 
 
-                    
+                
                 {% end %}
-                <br>
+                
                 
                 
                     <input class=button type="button" value="Back" onclick="history.go(-1)">
