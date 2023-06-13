@@ -79,12 +79,12 @@ class AccountList(tornado.web.RequestHandler):
         # Publish text in defined topic
         consumer = KafkaConsumer (group_id='test-consumer-group',bootstrap_servers =bootstrap_servers,auto_offset_reset='latest',enable_auto_commit = False)
         #consumer=KafkaConsumer(group_id='test-consumer-group',bootstrap_servers =bootstrap_servers, enable_auto_commit = False,auto_offset_reset = 'latest',value_deserializer=lambda x:  json.loads(x.decode('utf-8')))
-        ##consumer.subscription()
-        #sub=consumer.subscription()
+        #consumer.subscription(topic)
+        #sub=consumer.subscription('TCS001_TRANSACTION')
         #print(sub)
         #consumer.get()
         print("starting the server")
-        acct=int(self.get_body_argument("account"))
+        #acct=int(self.get_body_argument("account"))
        
         tp= TopicPartition(topic,0)
         consumer.assign([tp])
@@ -122,7 +122,7 @@ class AccountList(tornado.web.RequestHandler):
                 #if msg.value[1] == account:
                     #print(msg.value)
                 if msg.offset == lastOffset - 1:
-                      break
+                    break
         for m in value:
             k=(value[m].split(','))
             #print(k)
@@ -227,7 +227,7 @@ class AccountTransaction(tornado.web.RequestHandler):
                 h=(k[1].split(','))
                 h1=(h[0].split(':'))
                 h2=(h1[1].strip())
-                print(json.dumps(h2))
+                print(h2)
                 
                 f=(k[5].split(','))
                 f1=(f[0].split(':'))
