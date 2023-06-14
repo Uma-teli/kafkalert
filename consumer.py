@@ -44,9 +44,7 @@ class Login(tornado.web.RequestHandler):
         print(username)
         pwd = str(self.get_body_argument("pass"))
         print(pwd)
-        #end_url= base_url+str(self.get_body_argument("accnt"))
-        #req = requests.get(end_url, headers=headers, auth=('701e3938-c7c7-4568-9e3b-d474bfb39700', ''), verify=False)
-        #json_out = req.json()
+       
         print("json")
         if username =="admin" and pwd == "adminpass":
             print("success")
@@ -54,10 +52,7 @@ class Login(tornado.web.RequestHandler):
         else:
             print("no")
             self.render("static/trial.html")
-        #print(json_out)
-        #self.render("static/genericresp.html",msg=json_out['CSRGRES']['CSRGRES']['MESSAGES'],cname=json_out['CSRGRES']['CSRGRES']['CUSTOMER_NAME'],cid=json_out['CSRGRES']['CSRGRES']['CUSTOMER_ID'],date=json_out['CSRGRES']['CSRGRES']['SYS_DATE'],time=json_out['CSRGRES']['CSRGRES']['SYS_TIME'],bloc="regreq")
-
-
+       
 
 class basicRevHandler(tornado.web.RequestHandler):
     def get(self):
@@ -78,13 +73,9 @@ class AccountList(tornado.web.RequestHandler):
 
         # Publish text in defined topic
         consumer = KafkaConsumer (group_id='test-consumer-group',bootstrap_servers =bootstrap_servers,auto_offset_reset='latest',enable_auto_commit = False)
-        #consumer=KafkaConsumer(group_id='test-consumer-group',bootstrap_servers =bootstrap_servers, enable_auto_commit = False,auto_offset_reset = 'latest',value_deserializer=lambda x:  json.loads(x.decode('utf-8')))
-        #consumer.subscription(topic)
-        #sub=consumer.subscription('TCS001_TRANSACTION')
-        #print(sub)
-        #consumer.get()
+        
         print("starting the server")
-        #acct=int(self.get_body_argument("account"))
+        
        
         tp= TopicPartition(topic,0)
         consumer.assign([tp])
@@ -102,25 +93,12 @@ class AccountList(tornado.web.RequestHandler):
         
         for msg in consumer:
                 
-                #print("Consumer records:\n")
-                #print(msg)
-                #json_message = json.loads(msg.value)
-                #print(json_message)
-
-                #print(msg.value.decode('UTF-8'))
-                #value.append((msg.value))
+               
                 i=msg.value.decode('UTF-8').replace("'",' ')
                 value[j]=json.dumps(i)
                 j+=1
 
-                #value.append(json.dumps(i))
                 
-                
-
-                #print (msg.offset)
-                #print(msg.value.Account_Number.decode('UTF-8'))
-                #if msg.value[1] == account:
-                    #print(msg.value)
                 if msg.offset == lastOffset - 1:
                     break
         for m in value:
@@ -180,13 +158,9 @@ class AccountTransaction(tornado.web.RequestHandler):
 
         # Publish text in defined topic
         consumer = KafkaConsumer (group_id='test-consumer-group',bootstrap_servers =bootstrap_servers,auto_offset_reset='latest',enable_auto_commit = False)
-        #consumer=KafkaConsumer(group_id='test-consumer-group',bootstrap_servers =bootstrap_servers, enable_auto_commit = False,auto_offset_reset = 'latest',value_deserializer=lambda x:  json.loads(x.decode('utf-8')))
-        ##consumer.subscription()
-        #sub=consumer.subscription()
-        #print(sub)
-        #consumer.get()
+       
         print("starting the server")
-        #acct=int(self.get_body_argument("account"))
+       
        
         tp= TopicPartition(topic,0)
         consumer.assign([tp])
@@ -266,20 +240,6 @@ class AccountTransaction(tornado.web.RequestHandler):
        
         
        
-class AccountDetails(tornado.web.RequestHandler):
-    def post(self):
-        base_url='http://169.38.75.202:8085/zdih/rest/api/v1/accounts/'
-        #account=str(self.get_body_argument("account"))
-        headers = {'Content-Type': 'application/json'}
-        acct=str(self.get_body_argument("account"))
-        end_url= base_url+acct
-        req = requests.get(end_url, headers=headers, verify=False)
-        json_out = req.json()
-        print("json")
-        print(json_out)
-        
-        self.render("static/AccountDetails.html",accountno= json_out[acct]['accountNumber'], balance=json_out[acct]['availableBalance'],ID=json_out[acct]['bankId'],
-                    headers=headers,bloc="AccountDetails") 
 
 
 
@@ -291,7 +251,6 @@ if __name__ == "__main__":
          
         (r"/", landingPage),
         (r"/AccountList", AccountList),
-        (r"/AccountDetails",AccountDetails),
         (r"/AccountTransaction",AccountTransaction)
         
 
