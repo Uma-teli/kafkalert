@@ -308,4 +308,4 @@ def AccountTransaction():
 
 
 if __name__ == "__main__":
-    app.run(debug=True,host='169.38.108.133')
+    app.run(debug=True,host='0.0.0.0')
