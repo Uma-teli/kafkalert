@@ -7,10 +7,6 @@
     <title>zdih</title>
     <!--<link href="style.css" rel="stylesheet" > -->
     <style>
-
-    body{
-        background-color: lightblue;
-    }
          .mort-calculator {
     font-family: "Roboto", sans-serif;
     width: 600px;
@@ -194,7 +190,39 @@
     display: none; 
     text-align: center;
 }
+
+.popup1{
+    background-color:rosybrown;
+    width: 300px;
+    padding: 20px 25px;
+    position: absolute;
+    left:88%;
+    top:85%;
+    right:2%;
+    
+    transform: translate(-50%,-50%);
+    /*left: 50%;*/
+    /*top: 40%;*/
+    border-radius: 8px;
+    font-family: "Poppins",sans-serif;
+    display: none; 
+    text-align: center;
+}
 .popup button{
+    display: block;
+    margin:  0 0 20px auto;
+    background-color: transparent;
+    font-size: 30px;
+    color: #ffffff;
+	background: #03549a;
+	border-radius: 100%;
+	width: 40px;
+	height: 40px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+.popup1 button{
     display: block;
     margin:  0 0 20px auto;
     background-color: transparent;
@@ -232,10 +260,6 @@
     font-size: 20px;
 }
 
-.mort-calculator .top button[id="alert"]{
-   background-color:  rebeccapurple;
-}
-
 
 
 
@@ -258,6 +282,7 @@
 
 
     </style>
+   
 
        
 
@@ -269,8 +294,6 @@
 
 </head>
 <body>
-
-   
 
 
     <div class="popup">
@@ -286,28 +309,49 @@
         <button id="see" onclick="myFunction()">See Details</button>
         
     </div>
+    <div class="popup1">
+        <button id="close">&times;</button>
+        {% if (bloc=="Alert") %}
+
+        <h3>New Account Details:</h3>
+     
+        <h3>Account No:</h3>
+        <div class="opvalue">{{number}}</div>
+        <br>
+
+        <h3>Available Balance:</h3>
+        <div class="opvalue">{{balance}}</div>
+        <br>
+
+        <h3>Bank ID:</h3>
+        <div class="opvalue">{{bid}}</div>
+
+        {% end %}
+
+    </div>
         
    
+                
        
-     
+
+    
+            
+
+       
       
     
     <div class="mort-calculator">
         <div class="top">
            <!--<form action="Alert " method="post">
             //<button onclick="myFunction()"></button></form>-->
-            <form action="Alert" method=post>
-                <button id="alert" name="alert" onclick="myfunction()"></button>
-            </form>
-
             <h2>Fintech Application</h2>
             <h4>Using Kafka</h4>
-            
+
                         
                 
                 
                 
-                       
+                        
           
 
 
@@ -317,7 +361,7 @@
                     <div class="total-amount">
                          <h3>Check Balance:</h3>
                <!-- <div class="value">1</div>-->
-                         <input type="text" value="" placeholder="Enter Account no" name="account" class="value" />
+                         <input type="text" value="" placeholder="Enter Account no"  class="value" />
             
                          
                     </div>
@@ -348,13 +392,15 @@
              <form action ="AccountTransaction" method =post>
                   <div class="total-amount">
                     <h3>AccountTransaction:</h3>
-                    <input type="text" value="" placeholder="Enter your Account no" name="acct" class="value" />
+                    <input type="text" value="" placeholder="Enter your Account no" class="value" />
             
            
                    </div>
                    <button class="calculate-btn">SUBMIT</button>
                 </form>
-            <div class="right">
+            
+            
+             <div class="right">
                 <div class="output">
                     <div class="mort-emi">
                         <!--<h3>Model Prediction</h3>
@@ -369,13 +415,8 @@
                         
                     </div>
                 </div>
-
                
-                
-              
-
-
-       <!--- <script>-
+       <!--- <script>
                    // function myFunction() {
                    // alert(" New Account Created!!!");3
                    // window.open = 'static/AccountDetails.html';
@@ -406,177 +447,282 @@
                    // popup.appendChild(button);
 
         // Add the pop-up to the document body
-                   // document.body.appendChild(popup);
-                   
-   // }
+                   // document.body.appendChild(popup);-->
+                  +++++
 
-                    //var visited=localstorage.getItem('visited');
-                    //if(!visited){
-                       // alert("New message");
-                       // document.querySelector(".popup").style.display = "block";
-                       // localstorage.setItem('visited',true);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   {% if (bloc=="Alert") %}
                     
-                   // }
-                   
-                    //var callback=function(){
-                       // if (!localStorage.getItem('isPageLoaded')) {
-  // Display alert message
-  //alert('Welcome! This is your first visit.');
-                            // document.querySelector(".popup").style.display = "block";
-  // Set a flag in localStorage to indicate that the page has been loaded
-                            // localStorage.setItem('isPageLoaded', true);
-//}
+                        {% if t %}
+                        <script>
+                           document.querySelector(".popup").style.display = "block";
+
+
+                           setTimeout(
+                           function open(event){
+                           document.querySelector(".popup").style.display = "none";
+                           history.back();
+                         },
+                        6000 
+                           )
+
+                           document.querySelector("#close").addEventListener("click", function(){
+                  //document.querySelector(".popup").style.display = "none";
+                           history.back();
+                      
+                  
+                         });
+
+                       
+                        
                         
 
-                    //}
+                           
+                        </script>
+                        {% end %}
+                   {% end %}
 
-                   //if (!localStorage.getItem("isLoaded")) {
-                       // window.addEventListener("load", function(){
-            
-                       // document.querySelector(".popup").style.display = "block";
-                       // localStorage.setItem("isLoaded", true);
-                    //}
-                    //window.removeEventListener('load',callback);
-                    //window.addEventListener('load',callback);
-                     
-                    var callback=function(){
+                        <script>
+                             document.querySelector("#see").addEventListener("click", function(){
+                             document.querySelector(".popup1").style.display = "block";   
+                             });   
+
+                             document.querySelector("#close").addEventListener("click", function(){
+                             document.querySelector(".popup1").style.display = "none";
+                             history.back();
+                             })
+                      
+                        </script>
+   
+                    <!--var callback=function(){
                         document.querySelector(".popup").style.display = "block";
 
                     }
                     window.removeEventListener('load',callback);
           
-                        
-                    
-                    
-                    //setTimeout(
-                      // function open(event){
-                      // document.querySelector(".popup").style.display = "none";
-                   // },
-                  // 6000 
-
-                   
-
-
-                   
-                   
-  //  )
-//});
-
-
-               //   document.querySelector("#close").addEventListener("click", function(){
-                //  document.querySelector(".popup").style.display = "none";
+                
+    
+                    document.querySelector(".popup").style.display = "block";-->
                   
-           // });
+                   
 
-                    //function myFunction() {
-                        //  window.location.href = "static/newaccount.html";
-        
-            //}-->
-           
-            
-               
-               <!--- <script>-->
-
-                    
-                <!---  //var callback=function(){
-                   // $.ajax({
-                      // type: "POST",
-                      //  url: "/Alert"
-                    //})
-                    // document.querySelector(".popup").style.display = "block";
-                    //window.location.href='static/newaccount.html';
-
-                 // }
-                 // window.addEventListener('load',callback);
-
-               //  document.addEventListener('DOMContentLoaded', function() {
-                   //  fetch('Alert', {
-                    // method: 'POST'
-                    // })
-                    // .then(function() {
-                    //    window.loction.href='./static/newaccount.html';// Replace with the appropriate path
-                    // })
-                        
-                    
-                  // });
-                   // window.addEventListener('load', function() {
-                    // Replace with the appropriate path
-                 // });
-
-
-                // $(document).ready(function() {
-                 // $(document).on('click', function() {
-                  //  $.ajax({
-                    //   url: '/Alert', // Replace with the appropriate URL of your backend function
-                    //   method: 'POST',
-                    //   success: function(response) {
-                    //      console.log('Backend function executed successfully');
-            // Handle the response from the backend if needed
-                    //   },
-                    //   error: function(error) {
-                    //       console.log('Error executing backend function:', error);
-                    //    }
-                // });
-                // });
-               //  });
-                </script>
-                </form>-->
-               <!---
-                           <script>
-                            document.querySelector(".popup").style.display = "block";
-
-
-                            setTimeout(
-                            function open(event){
-                            document.querySelector(".popup").style.display = "none";
-                            history.back();
-                            },
-                           6000 
-                             )
-
-                            document.querySelector("#close").addEventListener("click", function(){
-          //document.querySelector(".popup").style.display = "none";
-                             history.back();
-              
-          
-                 });
-
-               
-                
-                
 
                    
-                </script>
-              
+                   
+   
 
-                <script>
-                     document.querySelector("#see").addEventListener("click", function(){
-                     document.querySelector(".popup1").style.display = "block";   
-                     });   
 
-                     document.querySelector("#close").addEventListener("click", function(){
-                     document.querySelector(".popup").style.display = "none";
-                     history.back();
-                     });
-              
-                </script>-->
+                <!---- document.querySelector("#close").addEventListener("click", function(){
+                  //document.querySelector(".popup").style.display = "none";
+                  history.back();
+                      
+                  
+            });
 
-            <!--var callback=function(){
-                document.q-->
-
+                    function myFunction() {
+                          window.location.href = "static/AccountDetails.html";
         
+            }-->
 
+
+
+                
 
                                 
 
 
-               
-                 
+                <!---  </script>-->
+
                 
 
                 
-           </div>
-            
+
+            </div>
           
         </div>
     </div>

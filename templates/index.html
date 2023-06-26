@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>zdih</title>
+    <!--<link href="style.css" rel="stylesheet" > -->
+    <style>
+    
+   
+         .mort-calculator {
+    font-family: "Roboto", sans-serif;
+    width: 550px;
+    margin: 20px auto;
+    background: #fff;
+    box-shadow: 0 12px 50px -11px rgb (0, 0, 0, 0.2);
+    border-radius: 8px;
+    color: black;
+    overflow: hidden;
+ }
+
+ .mort-calculator,
+ .mort-calculator * {
+    box-sizing: border-box;
+ }
+
+ .mort-calculator .top {
+    background:linear-gradient(to right,rgba(237, 33, 237, 0.655),purple);
+    color:black;
+    padding: 32px;
+    height:550px;
+ }
+
+.mort-calculator .top h2 {
+    margin-top: 0;
+    text-align: left;
+    margin-bottom: 40px;
+    font-size: 33px;
+}
+
+.mort-calculator form {
+    /*display: flex;*/
+    /*gap: 40px;*/
+    /*justify-content: space-between;*/
+   margin-bottom: 20px;
+   
+
+
+}
+
+.mort-calculator .title {
+    margin-bottom: 16px;
+}
+
+.mort-calculator form input {
+    font-size: 20px;
+    padding: 8px 24px;
+    width: 65%;
+    border-radius: 8px;
+    color: black;
+}
+
+.mort-calculator .result {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mort-calculator .result .left{
+    width: 100%;
+    padding: 8px 32px;
+}
+
+.mort-calculator .left h2{
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 14px;
+    
+}
+
+.mort-calculator .left h3{
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 5px;
+    margin-top: 70px;
+    color: black;
+}
+
+.mort-calculator .result .value{
+    font-size: 20px;
+    font-weight: 400;
+    padding: 8px 24px;
+    padding-bottom: 10px;
+   /* #width: 100%;
+   # border-bottom: 1px solid rgba(20, 33, 61, 0.2);*/
+}
+
+
+
+.mort-calculator .result .opvalue::after {
+    content: "%";
+    font-size: 24px;
+    font-weight: 400;
+    margin-right: 6px;
+    opacity: 0.4;
+}
+
+.mort-calculator .calculate-btn {
+    background: #e63946;
+    color: #fff;
+    border: none;
+    padding: 8px 32px;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 900;
+    cursor: pointer;
+    margin: 24px 0;
+    margin-left: 25px;
+}
+
+
+.mort-calculator .button{
+    background: #e63946;
+    color: #fff;
+    border: none;
+    font-size: 18px;
+    font-weight: 900;
+    padding: 8px 32px;
+    border-radius: 8px;
+    margin: 26px 0px;
+    margin-left: 25px;
+     
+
+}
+
+.mort-calculator .top h4{
+    font-size: 20px;
+    color: black;
+    
+}
+
+.mort-calculator .calculate-btn:hover{
+    background:crimson;
+}
+
+
+.mort-calculator .result .opvalue{
+    font-size: 30px;
+    font-weight: 900;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(20, 33, 61, 0.2);
+}
+
+.alert-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #f8f8f8;
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            padding: 20px;
+            max-width: 400px;
+            text-align: center;
+        }
+
+.alert-message {
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+.alert-button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+.popup{
+    background:linear-gradient(to right,hsla(245, 71%, 61%, 0.537),rgba(210, 99, 117, 0.76));
+    width: 250px;
+    padding: 2px 10px;
+    position: absolute;
+    left:87%;
+    top:81%;
+    right:2%;
+    
+    transform: translate(-50%,-50%);
+    /*left: 50%;*/
+    /*top: 40%;*/
+    border-radius: 8px;
+    font-family: "Poppins",sans-serif;
+    display: none; 
+    text-align: center;
+}
+.popup1{
+    background:linear-gradient(to right,rgba(97, 85, 226, 0.537),rgba(210, 99, 117, 0.76));
+    width: 250px;
+    padding: 10px 25px;
+    position: absolute;
+    left:87%;
+    top:81%;
+    right:2%;
+    
+    transform: translate(-50%,-50%);
+    /*left: 50%;*/
+    /*top: 40%;*/
+    border-radius: 8px;
+    font-family: "Poppins",sans-serif;
+    display: none; 
+    text-align: left;
+}
+
+.popup1 button[id=close1]{
+    display: block;
+    margin:  0 0 20px auto;
+    background-color: transparent;
+    font-size: 20px;
+    color: #ffffff;
+	/*background: #03549a85;*/
+	border-radius: 100%;
+	width: 40px;
+	height: 40px;
+    border: none;
+    outline: none;
+    /*cursor: pointer;*/
+}
+
+.popup2{
+    background:linear-gradient(to right,hsla(245, 71%, 61%, 0.537),rgba(210, 99, 117, 0.76));
+    width: 250px;
+    padding: 2px 10px;
+    position: absolute;
+    left:89%;
+    top:84%;
+    right:2%;
+    
+    transform: translate(-50%,-50%);
+    /*left: 50%;*/
+    /*top: 40%;*/
+    border-radius: 8px;
+    font-family: "Poppins",sans-serif;
+    display: none; 
+    text-align: center;
+}
+
+.popup button[id=close]{
+    display: block;
+    margin:  0 0 20px auto;
+    background-color: transparent;
+    font-size: 20px;
+    color: #ffffff;
+	/*background: #03549a85;*/
+	border-radius: 100%;
+	width: 40px;
+	height: 40px;
+    border: none;
+    outline: none;
+    /*cursor: pointer;*/
+}
+
+.popup2 button[id=close2]{
+    display: block;
+    margin:  0 0 20px auto;
+    background-color: transparent;
+    font-size: 20px;
+    color: #ffffff;
+	/*background: #03549a85;*/
+	border-radius: 100%;
+	width: 40px;
+	height: 40px;
+    border: none;
+    outline: none;
+    /*cursor: pointer;*/
+}
+
+
+.popup button[id=close]:hover{
+    background:lightblue;
+}
+
+.popup1 button[id=close1]:hover{
+    background:lightblue;
+}
+
+.popup2 button[id=close2]:hover{
+    background:lightblue;
+}
+.popup button{
+    display: block;
+    margin:  0 0 20px auto;
+    background-color: transparent;
+    font-size: 28px;
+    color: #ffffff;
+	/*background: #03549a85;*/
+	border-radius: 100%;
+	width: 40px;
+	height: 40px;
+    border: none;
+    outline: none;
+    /*cursor: pointer;*/
+}
+
+
+
+.popup h2{
+    margin-top: 0px;
+}
+.popup p{
+    font-size: 18px;
+    /*text-align: justify;*/
+    margin-left: 20px;
+    /*line-height: 25px;*/
+}
+.popup button[id="see"]{
+    display: block;
+    width: 150px;
+    position: relative;
+    margin: 10px auto;
+    text-align: center;
+    background-color: #0f72e5;
+	border-radius: 20px;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 8px 0;
+    font-size: 20px;
+}
+.popup1 td{
+    margin-left: 20px;
+}
+
+
+
+
+@media (max-width: 650px) {
+    .mort-calculator {
+        width: 90%;
+        max-width: 700px;
+    }
+
+    .mort-calculator form {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .mort-calculator .result {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+
+    </style>
+
+       
+
+      
+
+    
+
+    
+
+</head>
+<body>
+
+
+
+
+
+
+
+
+       
+
+      
+
+
+    <div class="popup">
+        
+        <button id="close">&times;</button>
+        <h2>Alert</h2>
+        <p>
+            New Account Created!!!
+        </p>
+        
+        <button id="see" onclick="myFunction()">See Details</button>
+    
+    </div>
+    
+
+    <div class="popup2">
+        
+        <button id="close2">&times;</button>
+        <h2>Alert</h2>
+        <p>
+            Your A/c {{acct}} balance Exceeded 10000!!!
+        </p>
+        
+        <!--<button id="see" onclick="myFunction()">See Details</button>-->
+    
+    </div>
+
+    <div class="popup1">
+        <button id="close1">&times;</button>
+        {% if (bloc=="Alert") %}
+
+        <h3>New Account Details:</h3>
+        <th>
+            <td><b>Account No:</b></td>
+
+                 <td>{{number}}</td>
+        </th>
+        <br>
+        <th>
+            <td><b>Available Balance:</b></td>
+                 <td>{{balance}}</td>
+       </th>
+       <br>
+       <th>
+            <td><b>Bank ID:</td></b>
+                 <td>{{bid}}</td>
+       </th>
+        {% endif %}
+
+    </div>
+      
+
+      
+    
+    <div class="mort-calculator">
+        <div class="top">
+           <!--<form action="Alert " method="post">
+            //<button onclick="myFunction()"></button></form>-->
+            <h2>Fintech Application</h2>
+            <h4>Using Kafka</h4>
+        
+                 <form action ="AccountList" method =post>
+                    <div class="total-amount">
+                         <h3>Check Balance:</h3>
+               <!-- <div class="value">1</div>-->
+                         <input type="text" value="" placeholder="Enter Account no" name="account" class="value" />
+            
+                         
+                    </div>
+                    <button class="calculate-btn">SUBMIT</button>
+                        
+                 </form>
+                   
+
+                 
+
+            
+                   
+                       
+                
+
+               
+
+
+                
+               <!-- <div class="value">1</div>-->
+                <!----  <input type="text" value="" placeholder="Enter your Account no" name="account" class="value" />
+            
+            
+                   </div>
+                   <button class="calculate-btn">SUBMIT</button>
+                </form>-->
+
+             <form action ="AccountTransaction" method =post>
+                  <div class="total-amount">
+                    <h3>AccountTransaction:</h3>
+                    <input type="text" value="" placeholder="Enter your Account no" name="acct" class="value" />
+            
+           
+                   </div>
+                   <button class="calculate-btn">SUBMIT</button>
+                </form>
+               <div class="right">
+                <div class="output">
+                    <div class="mort-emi">
+                        <!--<h3>Model Prediction</h3>
+                        <div class="opvalue"></div>-->
+
+                        
+                        
+                        
+
+                        
+                
+                        
+                    </div>
+                </div>
+
+                    
+                    {% if (bloc=="Alert") %}
+                    
+                       {% if bal %}
+                        <script>
+                 //if (!localStorage.getItem("isLoaded")) {
+                         //window.addEventListener("load", function(){
+                            callback=function(){
+                             document.querySelector(".popup2").style.display = "block";
+                            }
+                            window.addEventListener('load',callback);
+                          
+
+         
+                           
+                     // localStorage.setItem("isLoaded", true);
+                     //})
+                           
+                            
+                        
+
+
+                             setTimeout(
+                             function open(event){
+                             document.querySelector(".popup2").style.display = "none";
+                 
+                             },
+                             6000 
+                             )
+
+                             document.querySelector("#close2").addEventListener("click", function(){
+                             document.querySelector(".popup2").style.display = "none";
+                             });
+                            
+                            // window.removeEventListener('load',callback);
+                            // window.addEventListener('load',callback);
+                        </script>
+                        {% endif%}
+                    {% endif %}
+
+
+                        
+
+
+
+                    {% if (bloc=="Alert") %}
+                    
+                       {% if t %}
+                       <script>
+                        //if (!localStorage.getItem("isLoaded")) {
+                           // window.addEventListener("load", function(){
+                             document.querySelector(".popup").style.display = "block";
+                            // localStorage.setItem("isLoaded", true);
+                            //})
+                       // }
+
+
+                        setTimeout(
+                        function open(event){
+                        document.querySelector(".popup").style.display = "none";
+                        
+                        },
+                       6000 
+                         )
+
+                        document.querySelector("#close").addEventListener("click", function(){
+                        document.querySelector(".popup").style.display = "none";
+                         
+          
+      
+                        });
+
+           
+            
+            
+
+               
+                        </script>
+                    {% endif %}
+                {% endif %}
+
+                 <script>
+                     document.querySelector("#see").addEventListener("click", function(){
+                     document.querySelector(".popup").style.display = "none"; 
+                     document.querySelector(".popup1").style.display = "block";  
+                    
+                     });   
+
+                    setTimeout(
+                      function open(event){
+                      document.querySelector(".popup1").style.display = "none";
+                        
+                    },
+                    10000 
+                    )
+
+
+                     document.querySelector("#close1").addEventListener("click", function(){
+                     document.querySelector(".popup1").style.display = "none";
+                     
+                    
+                    });
+          
+            </script>
+
+       
+    
+
+
+            
+
+                
+
+                
+           </div>
+            
+        </div> 
+        
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.1.1/dist/chart.umd.min.js"></script>
+    <!--<script src="main.js"></script>-->
+
+</body>
+</html>

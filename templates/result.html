@@ -24,15 +24,17 @@
  }
 
  .mort-calculator .top {
-    background: rebeccapurple;
-    color: #fff;
+    background:linear-gradient(to right,rgba(237, 33, 237, 0.655),purple);
+    color: black;
     padding: 32px;
-    height: 550px;
+    height: 450px;
  }
 
 .mort-calculator .top h2 {
     margin-top: 0;
-    text-align: center;
+    text-align: left;
+    font-size: 33px;
+
     
    
 }
@@ -165,15 +167,7 @@
             <h2>Fintech Application</h2>
 
 
-            {% if (bloc=="Alert") %}
-                    
-                    {% if {{trigger}} %}
-               <script>
-                   alert('This is an alert message!');
-                </script>
-                       {% end %}
-            {% end %}
-   
+           
         
 
             <!---<form action="predictScore" method="POST">
@@ -252,7 +246,7 @@
                             
 
                         
-                        {% end %}-->
+                        {% endif %}-->
                     </div>
                 </div>
                 
@@ -270,7 +264,7 @@
                 
 
                 
-                {% end %}
+                {% endif %}
 
 
                

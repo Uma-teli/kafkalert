@@ -26,16 +26,16 @@
  }
 
  .mort-calculator .top {
-    background: rebeccapurple;
-    color: #fff;
+    background:linear-gradient(to right,rgba(237, 33, 237, 0.655),purple);
+    color: black;
     padding: 32px;
-    height: 450px;
+    height: 600px;
  }
- 
 
 .mort-calculator .top h2 {
     margin-top: 0;
-    text-align: center;
+    text-align: left;
+    font-size: 33px;
    
 }
 
@@ -134,7 +134,7 @@
 .mort-calculator .result .opvalue{
     font-size: 20px;
     font-weight: 900;
-    padding-bottom: 10px;
+    padding-bottom: 5px;
     border-bottom: 1px solid rgba(20, 33, 61, 0.2);
 }
 
@@ -193,35 +193,34 @@
 
 
     
-            <div class="right">
-                <div class="output">
-                    <div class="mort-emi">
+        <div class="right">
+            <div class="output">
+                <div class="mort-emi">
                         
                         
-                    </div>
                 </div>
+             </div>
                 
-                    {% if (bloc == "Alert") %}
-                        <h3>New Account Details:</h3>
+                {% if (bloc == "AccountTransaction") %}
+                    <h3>Account Transaction Information:</h3>
                 
-                        <h3>Account No:</h3>
-                        <div class="opvalue">{{account}}</div>
-                        <br>
+                   <h3>Account No:</h3>
+                   <div class="opvalue">{{Accountno}}</div>
+                   
+                   <h3>Available Balance:</h3>
+                   <div class="opvalue">{{balance}}</div>
+                   
+                   <h3>Bank ID:</h3>
+                   <div class="opvalue">{{ID}}</div>
+                   
+                   <h3>Transaction Amount:</h3>
+                   <div class="opvalue">{{amt}}</div>
 
-                        <h3>Available Balance:</h3>
-                        <div class="opvalue">{{balance}}</div>
-                        <br>
-
-                        <h3>Bank ID:</h3>
-                        <div class="opvalue">{{bid}}</div>
-                        <br>
-
-                        
-                
-                
-                    
-               
-                
+                   <h3>Transaction Id:</h3>
+                   <div class="opvalue">{{tid}}</div>
+                  
+                   
+                   
 
                    
                     
@@ -232,10 +231,10 @@
             
                
             
-                    {% end %}
+                {% endif %}
                 
                 
-                         <input class=button type="button" value="Back" onclick="history.go(-1)">
+                <input class=button type="button" value="Back" onclick="history.go(-1)">
             </div>
           
         </div>
